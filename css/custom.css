@@ -1,0 +1,48 @@
+.navbar-home {
+    height: 65px;
+}
+
+.logo {
+    padding-top: 11px;
+}
+
+.navbar-button {
+    height: 65px;
+}
+
+.navbar-button > li > a {
+    height: 65px;
+    padding-top: 22px;
+    font-size: 16px;
+}
+
+.recherche {
+    padding-top: 10px;
+}
+
+.input-query {
+    box-shadow: none;
+    height: 45px;
+    font-size: 18px;
+}
+
+.button-query {
+    height: 45px;
+    width: 45px;
+    background-color: #47d4ff;
+    border-color: #47d4ff
+}
+
+.carousel-inner {
+    max-height: 600px;
+}
+.imag {
+    position:absolute;
+    z-index: 1;
+}
+
+.masque {
+    position:relative;
+    z-index: 2;
+
+}
