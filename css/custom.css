@@ -33,16 +33,70 @@
     border-color: #47d4ff
 }
 
-.carousel-inner {
-    max-height: 600px;
+body {
+    background-color: #f0f0f0;
 }
-.imag {
+
+.core {
+    margin-top: 50px;
+    background-color: white;
+}
+
+.carousel-inner {
+    height: 50vh;
+}
+
+.carousel-imag {
     position:absolute;
     z-index: 1;
 }
 
-.masque {
-    position:relative;
+.carousel-masque {
+    position: absolute;
     z-index: 2;
+}
 
+.carousel-text {
+    margin-top: 2%;
+    margin-left: 50%;
+    width: 50%;
+    height: 40vh;
+    position: absolute;
+    z-index: 3;
+    overflow-y: auto;
+    direction: rtl;
+    text-align: end;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 16px;
+}
+
+.carousel-text::-webkit-scrollbar {
+    width: 9px;
+}
+
+.carousel-text::-webkit-scrollbar-track-piece {
+    color: transparent;
+}
+
+.carousel-text::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: rgba(255,255,255,0.5);
+}
+
+
+
+.carousel-control.right{
+    background-image: none;
+}
+
+.carousel-control.left{
+    background-image: none;
+}
+
+.footer {
+    text-align: right;
+    padding-top: 10px;
+    background-color: #0f0f0f;
+    color: gray;
 }
