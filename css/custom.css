@@ -33,17 +33,31 @@
     border-color: #47d4ff
 }
 
+.mes_billets_but {
+    margin-top: 13px;
+    background-color: #47d4ff;
+    border-color: transparent;
+    border-radius: 5px;
+    font-size: 18px;
+    color: black;
+}
+
+.mes_billets_but:hover {
+    background-color: #82dbff;
+
+}
+
 body {
     background-color: #f0f0f0;
+    margin-top: 65px;
 }
 
 .core {
-    margin-top: 50px;
     background-color: white;
 }
 
 .carousel-inner {
-    height: 50vh;
+    height: 60vh;
 }
 
 .carousel-imag {
@@ -60,12 +74,10 @@ body {
     margin-top: 2%;
     margin-left: 50%;
     width: 50%;
-    height: 40vh;
+    height: 50vh;
     position: absolute;
     z-index: 3;
     overflow-y: auto;
-    direction: rtl;
-    text-align: end;
     padding-left: 15px;
     padding-right: 15px;
     font-size: 16px;
@@ -81,17 +93,17 @@ body {
 
 .carousel-text::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background-color: rgba(255,255,255,0.5);
+    background-color: rgba(255,255,255,0.6);
 }
-
-
 
 .carousel-control.right{
     background-image: none;
+    width: 50px;
 }
 
 .carousel-control.left{
     background-image: none;
+    width: 50px;
 }
 
 .footer {
