@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Spectacle - Recherche</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/recherche.css">
+
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<header>
+    <nav class="navbar navbar-inverse navbar-fixed-top navbar-home">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand logo" href="index.html">
+                    <img src="img/logo.png" alt="MySpectacle" class="hidden-xs hidden-sm">
+                </a>
+            </div>
+
+            <ul class="nav navbar-nav navbar-right navbar-button">
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Mon compte</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Panier</a></li>
+            </ul>
+
+            <a href="#" class="navbar-right btn mes_billets_but"> Mes billets</a>
+
+            <form class="col-sm-4 recherche">
+                <div class="input-group group_query">
+                    <input type="text" class="form-control input-query" placeholder="Chercher un spectacle">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default button-query" type="submit">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </nav>
+</header>
+    <div class="col-md-8 col-md-offset-1 core">
+        <h1>Votre recherche</h1>
+        <p> Affiner votre recherche avec les filtres à disposition sur la droite de l'écran </p>
+
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img class="carousel-imag" src="test/spectacle1.jpg" style="width:100%;">
+                    <img class="carousel-masque" src="img/masque.png" style="width:100%;">
+                    <div class="carousel-text">
+                        <h2>NIL ACTUM</h2>
+                        <br><b>THÉÂTRE
+                        <br>JE 28 - VE 29 SEPT</b>
+                        <br>Pour chaque création, Le groupe n+1 déploie un processus de travail singulier à la croisée du théâtre et des sciences. Un premier temps de travail prend la forme de rencontres avec des chercheurs à qui le groupe propose un protocole de recherche ludique, consacré pour ce spectacle aux mécanismes de l’action. Puis, vient le temps de la fabrication au plateau. Là, l’action se déroule dans un monde imaginaire, un monde dans lequel on n’agit plus, où les actions sont apparemment sans conséquence où des choses agissent sans nous, où l’on continue cependant à penser, à parler, à discourir. Les habitants de ce monde sont gouvernés par un ensemble de règles, dont l’efficacité n’est pas mise en doute. Reprendre la main sur l’action, ce sera donc commencer par s’interroger. Peut-on déjouer les règles que l’on fabrique pour soi-même ? Comment éplucher une pomme de terre ? Comment se placer vis à vis d’un photocopieur ? … Certains décident d’inventer de nouvelles façons de se mettre en action. Ceci afin de changer le monde qui leur est soumis. Leur devise : nil actum reputans si quid supresset agendum, rien n’est fait tant qu’il reste quelque chose à faire !
+                    </div>
+                </div>
+
+                <div class="item">
+                    <img class="carousel-imag" src="test/spectacle2.jpg" style="width:100%;">
+                    <img class="carousel-masque" src="img/masque.png" style="width:100%;">
+                    <div class="carousel-text">
+                        <h2>#SOFTLOVE</h2>
+                        <br><b>THÉÂTRE
+                        <br>JE 05 OCT</b>
+                        <br>#Softlove relate 24 heures de la vie d’une femme à travers le regard de son assistant numérique.
+                    </div>
+                </div>
+
+                <div class="item">
+                    <img class="carousel-imag" src="test/spectacle3.jpg" style="width:100%;">
+                    <img class="carousel-masque" src="img/masque.png" style="width:100%;">
+                    <div class="carousel-text">
+                        <h2>LE PAS GRAND CHOSE</h2>
+                        <br><b>CONFÉRENCE PERFORMÉE
+                        <br>MA 10 - ME 11 OCT</b>
+                        <br>Cirque mental ou comment recréer le monde à partir du point minimal, l’origine !
+                    </div>
+                </div>
+            </div>
+
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+
+
+    <div class="col-5 col-md-2 sidebar-offcanvas">
+        <div class="well">Votre recherche :</div>
+
+        <span class=" label navbar-inverse-perso">Régions</span>
+
+        <div class="btn-group ">
+            <button data-toggle="dropdown" class="btn btn-default dropdown-toggle " type="button">Choisir une région <span class="caret"></span></button>
+            <ul role="menu" class="dropdown-menu dropdown-menu-default">
+                <li><a href="#">Bourgogne-Franche-Comté</a></li>
+                <li><a href="#">Bretagne</a></li>
+                <li><a href="#">Centre-Val de Loire</a></li>
+                <li><a href="#">Corse</a></li>
+                <li><a href="#">Grand Est</a></li>
+                <li><a href="#">Hauts-de-France</a></li>
+                <li><a href="#">Île-de-France</a></li>
+                <li><a href="#">Normandie</a></li>
+                <li><a href="#">Nouvelle-Aquitaine</a></li>
+                <li><a href="#">Occitanie</a></li>
+                <li><a href="#">Pays de la Loire</a></li>
+                <li><a href="#">Provence-Alpes-Côte d'Azur</a></li>
+                <li class="divider"></li>
+                <li><a href="#"> Guadeloupe</a></li>
+                <li><a href="#"> Martinique</a></li>
+                <li><a href="#"> Guyane</a></li>
+                <li><a href="#"> La Réunion</a></li>
+                <li><a href="#"> Mayottes</a></li>
+            </ul>
+        </div>
+        <span class=" label navbar-inverse-perso">Période</span>
+
+        <a href="#" class="list-group-item">Date 1</a>
+        <a href="#" class="list-group-item">Date 2</a>
+
+        <span class="label navbar-inverse-perso">Type</span>
+        <a href="#" class="list-group-item"><span class="badge badge-inverse">0</span> Evenement</a>
+        <a href="#" class="list-group-item"><span class="badge badge-inverse">0</span> Salle</a>
+        <a href="#" class="list-group-item"><span class="badge badge-inverse">0</span> Artiste</a>
+
+
+
+
+
+        <a href="#" class="list-group-item">Link</a>
+
+
+    </div>
+
+
+<div class="col-md-12 footer">
+    <p>Contact : Zimoul@gmail.com</p>
+</div>
+
+</body>
+</html>
