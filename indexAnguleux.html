@@ -5,7 +5,7 @@
     <title>My Spectacle</title>
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/recherche.css">
 
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -15,15 +15,11 @@
 </head>
 <body>
 
-
+<div ng-include="'header.html'"></div>
 
 <div ng-view></div>
 
-<div class="col-md-12 footer">
-    <p>Contact : Zimoul@gmail.com</p>
-</div>
-
-
+<div ng-include="'footer.html'"></div>
 
 </body>
 </html>
