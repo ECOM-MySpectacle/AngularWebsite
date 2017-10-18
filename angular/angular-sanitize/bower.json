@@ -1,0 +1,10 @@
+{
+  "name": "angular-sanitize",
+  "version": "1.6.7-build.5480+sha.00936ad",
+  "license": "MIT",
+  "main": "./angular-sanitize.js",
+  "ignore": [],
+  "dependencies": {
+    "angular": "1.6.7-build.5480+sha.00936ad"
+  }
+}
