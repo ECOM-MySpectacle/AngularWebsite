@@ -71,16 +71,7 @@ body {
 }
 
 .carousel-text {
-    margin-top: 2%;
-    margin-left: 50%;
-    width: 50%;
-    height: 50vh;
-    position: absolute;
-    z-index: 3;
-    overflow-y: auto;
-    padding-left: 15px;
-    padding-right: 15px;
-    font-size: 16px;
+
 }
 
 .carousel-text::-webkit-scrollbar {
@@ -104,11 +95,4 @@ body {
 .carousel-control.left{
     background-image: none;
     width: 50px;
-}
-
-.footer {
-    text-align: right;
-    padding-top: 10px;
-    background-color: #0f0f0f;
-    color: gray;
 }

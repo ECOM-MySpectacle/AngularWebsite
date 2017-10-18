@@ -71,6 +71,7 @@ body {
 }
 
 .carousel-text {
+    text-align: left;
     margin-top: 2%;
     margin-left: 50%;
     width: 50%;
@@ -83,17 +84,23 @@ body {
     font-size: 16px;
 }
 
+.carousel-text div {
+}
+
 .carousel-text::-webkit-scrollbar {
     width: 9px;
+    padding-left: 200px;
 }
 
 .carousel-text::-webkit-scrollbar-track-piece {
     color: transparent;
+
 }
 
 .carousel-text::-webkit-scrollbar-thumb {
     border-radius: 10px;
     background-color: rgba(255,255,255,0.6);
+
 }
 
 .carousel-control.right{
