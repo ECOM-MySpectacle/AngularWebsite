@@ -22,7 +22,8 @@ angular.module('app').controller('CarouselDemoCtrl', function ($scope) {
 
 
 angular.module('app').controller('rechercher', function ($scope, Restangular) {
-    $scope.rechercher = function () {
+    $scope.rechercher = function (e) {
+        if (e !== 13) return;
         var query = document.getElementById("query").value;
 
         Restangular.all('students');
@@ -32,6 +33,7 @@ angular.module('app').controller('rechercher', function ($scope, Restangular) {
 
 
 });
+
 
 angular.module('app')
     .config(function($routeProvider) {
@@ -44,7 +46,9 @@ angular.module('app')
                 templateUrl : 'recherche.html'
             })
 
-            .when('/billets', {
-                templateUrl : 'billets.html'
+            .otherwise({
+                templateUrl : '404.html'
             })
+
+
     });
