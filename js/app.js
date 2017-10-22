@@ -20,25 +20,27 @@ app.controller('CarouselDemoCtrl', function ($scope) {
     }
 });
 
-app.controller("compteModal",['$scope','$uibModal',function($scope,$uibModal){
 
-    $scope.openModal = function(){
+app.controller("compteModal", ['$scope','$uibModal','$uibModalStack',function($scope,$uibModal,$uibModalStack){
+
+    $scope.$on('handleBroadcast', function() {
+        $scope.openModal('creationCompte.html', creationCompteController);
+    });
+
+    $scope.openModal = function(url, controller){
+        $uibModalStack.dismissAll('another modal just opened');
         $scope.modalInstance = $uibModal.open({
             ariaLabelledBy: 'modal-title',
             ariaDescribedBy: 'modal-body',
-            templateUrl: 'connexion.html',
-            controller :'ModelHandlerController',
+            templateUrl: url,
+            controller : controller,
             controllerAs: '$ctrl',
-
-            resolve: {
-
-            }
+            resolve: {}
         });
     }
-
 }]);
 
-app.controller("ModelHandlerController",function($scope,$uibModalInstance){
+app.controller("creationCompteController",function($scope,$uibModalInstance){
 
     $scope.cancelModal = function(){
         $uibModalInstance.dismiss('close');
@@ -51,6 +53,20 @@ app.controller("ModelHandlerController",function($scope,$uibModalInstance){
     };
 
 });
+
+app.controller("connexionController", function($scope,$uibModalInstance){
+
+    $scope.cancelModal = function(){
+        $uibModalInstance.dismiss('close');
+    };
+    $scope.connexion = function(){
+        var mail = document.getElementById('email-form').value;
+        var pwd = document.getElementById('pwd-form').value;
+        console.log('mail: '+mail+' - pwd: '+pwd);
+        $uibModalInstance.close('save');
+    };
+
+}   );
 
 
 
