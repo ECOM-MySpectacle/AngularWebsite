@@ -8,11 +8,14 @@
             </div>
 
             <ul class="nav navbar-nav navbar-right navbar-button">
-                <li><a href="#!user"><span class="glyphicon glyphicon-user"></span> Mon compte</a></li>
+                <li>
+                    <button class="navbar-inverse navbar-button mon-compte-but" ng-controller="compteModal" ng-click="openModal()">
+                        <span class="glyphicon glyphicon-user"></span> Mon compte</button>
+                </li>
                 <li><a href="#!cart"><span class="glyphicon glyphicon-shopping-cart"></span> Panier</a></li>
             </ul>
 
-            <a href="#!billets" class="navbar-right btn mes_billets_but"> Mes billets</a>
+            <a href="#!billets" class="navbar-right btn mes-billets-but"> Mes billets</a>
 
             <div ng-controller="rechercher" class="col-sm-4 recherche">
                 <div class="input-group group_query">

@@ -1,5 +1,5 @@
-angular.module('app', ['ngAnimate', 'ngSanitize', 'ngRoute', 'restangular', 'ui.bootstrap']);
-angular.module('app').controller('CarouselDemoCtrl', function ($scope) {
+var app = angular.module('app', ['ngAnimate', 'ngSanitize', 'ngRoute', 'restangular', 'ui.bootstrap']);
+app.controller('CarouselDemoCtrl', function ($scope) {
     $scope.myInterval = 5000;
     $scope.noWrapSlides = false;
     $scope.active = 0;
@@ -20,8 +20,42 @@ angular.module('app').controller('CarouselDemoCtrl', function ($scope) {
     }
 });
 
+app.controller("compteModal",['$scope','$uibModal',function($scope,$uibModal){
 
-angular.module('app').controller('rechercher', function ($scope, Restangular) {
+    $scope.openModal = function(){
+        $scope.modalInstance = $uibModal.open({
+            ariaLabelledBy: 'modal-title',
+            ariaDescribedBy: 'modal-body',
+            templateUrl: 'connexion.html',
+            controller :'ModelHandlerController',
+            controllerAs: '$ctrl',
+
+            resolve: {
+
+            }
+        });
+    }
+
+}]);
+
+app.controller("ModelHandlerController",function($scope,$uibModalInstance){
+
+    $scope.cancelModal = function(){
+        $uibModalInstance.dismiss('close');
+    };
+    $scope.connexion = function(){
+        var mail = document.getElementById('email-form').value;
+        var pwd = document.getElementById('pwd-form').value;
+        console.log('mail: '+mail+' - pwd: '+pwd);
+        $uibModalInstance.close('save');
+    };
+
+});
+
+
+
+
+app.controller('rechercher', function ($scope, Restangular) {
     $scope.rechercher = function (e) {
         if (e !== 13) return;
         var query = document.getElementById("query").value;
@@ -35,8 +69,7 @@ angular.module('app').controller('rechercher', function ($scope, Restangular) {
 });
 
 
-angular.module('app')
-    .config(function($routeProvider) {
+app.config(function($routeProvider) {
         $routeProvider
             .when('/', {
                 templateUrl : 'accueil.html'
