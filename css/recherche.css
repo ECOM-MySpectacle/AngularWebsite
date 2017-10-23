@@ -150,3 +150,10 @@ body {
     margin-top: 10px;
     margin-bottom: 5px;
 }
+
+.btn-radiobut {
+    border-radius: 0px;
+    background-color: white;
+    color: black;
+    border-color: #dcdcdc;
+}

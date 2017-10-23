@@ -1,4 +1,7 @@
-var app = angular.module('app', ['ngAnimate', 'ngSanitize', 'ngRoute', 'restangular', 'ui.bootstrap']);
+var app = angular.module('app', ['ngAnimate', 'ngSanitize', 'ngRoute', 'restangular', 'ui.bootstrap', 'angularjs-dropdown-multiselect']);
+
+var query = "";
+
 app.controller('CarouselDemoCtrl', function ($scope) {
     $scope.myInterval = 5000;
     $scope.noWrapSlides = false;
@@ -69,20 +72,143 @@ app.controller("connexionController", function($scope,$uibModalInstance){
 }   );
 
 
+app.controller('recherche', function ($scope, Restangular) {
 
+    if (document.getElementById("well-query")) {console.log(query);
+        document.getElementById("well-query").innerHTML = query;
+    }
 
-app.controller('rechercher', function ($scope, Restangular) {
-    $scope.rechercher = function (e) {
-        if (e !== 13) return;
-        var query = document.getElementById("query").value;
-
-        Restangular.all('students');
-
-        location.href='#!recherche';
+    $scope.regionDropdownModel = [];
+    $scope.regionDropdownData = [
+        {id: 1, label: "Auvergne-Rhône-Alpes"},
+        {id: 2, label: "Bourgogne-Franche-Comté"},
+        {id: 3, label: "Bretagne"},
+        {id: 4, label: "Centre-Val de Loire"},
+        {id: 5, label: "Corse"},
+        {id: 6, label: "Grand Est"},
+        {id: 7, label: "Hauts-de-France"},
+        {id: 8, label: "Île-de-France"},
+        {id: 9, label: "Normandie"},
+        {id: 10, label: "Nouvelle-Aquitaine"},
+        {id: 11, label: "Occitanie"},
+        {id: 12, label: "Pays de la Loire"},
+        {id: 13, label: "Provence-Alpes-Côte d\'Azur"}
+        ];
+    $scope.regionDropdownSettings = {
+        showCheckAll: false,
+        showUncheckAll: false,
+        smartButtonMaxItems: 3,
+        smartButtonTextConverter: function(itemText, originalItem) {
+            return itemText;
+        }
     };
 
+    $scope.radioModel = "evenement";
+
+    $scope.rechercher = function (e) {
+        if (e !== 13) return;
+        query = document.getElementById("query").value;
+
+        if (document.getElementById("well-query")) {console.log(query);
+            document.getElementById("well-query").innerHTML = query;
+        }
+
+        //Restangular.all('students');
+
+        if (location.href.slice(-10)!=='/recherche')
+            location.href = '#!recherche';
+    };
+
+    $scope.today = function() {
+        $scope.dt = new Date();
+    };
+    $scope.today();
+
+    $scope.clear = function() {
+        $scope.dt = null;
+    };
+
+    $scope.inlineOptions = {
+        customClass: getDayClass,
+        minDate: new Date(),
+        showWeeks: true
+    };
+
+    $scope.dateOptions = {
+        formatYear: 'yy',
+        maxDate: new Date(2020, 5, 22),
+        minDate: new Date(),
+        startingDay: 1
+    };
+
+    $scope.toggleMin = function() {
+        $scope.inlineOptions.minDate = $scope.inlineOptions.minDate ? null : new Date();
+        $scope.dateOptions.minDate = $scope.inlineOptions.minDate;
+    };
+
+    $scope.toggleMin();
+
+    $scope.open1 = function() {
+        $scope.popup1.opened = true;
+    };
+
+    $scope.open2 = function() {
+        $scope.popup2.opened = true;
+    };
+
+    $scope.setDate = function(year, month, day) {
+        $scope.dt = new Date(year, month, day);
+    };
+
+    $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+    $scope.format = $scope.formats[0];
+    $scope.altInputFormats = ['M!/d!/yyyy'];
+
+    $scope.popup1 = {
+        opened: false
+    };
+
+    $scope.popup2 = {
+        opened: false
+    };
+
+    var tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    var afterTomorrow = new Date();
+    afterTomorrow.setDate(tomorrow.getDate() + 1);
+    $scope.events = [
+        {
+            date: tomorrow,
+            status: 'full'
+        },
+        {
+            date: afterTomorrow,
+            status: 'partially'
+        }
+    ];
+
+    function getDayClass(data) {
+        var date = data.date,
+            mode = data.mode;
+        if (mode === 'day') {
+            var dayToCheck = new Date(date).setHours(0, 0, 0, 0);
+
+            for (var i = 0; i < $scope.events.length; i++) {
+                var currentDay = new Date($scope.events[i].date).setHours(0, 0, 0, 0);
+
+                if (dayToCheck === currentDay) {
+                    return $scope.events[i].status;
+                }
+            }
+        }
+
+        return '';
+    }
 
 });
+
+
+
 
 
 app.config(function($routeProvider) {
@@ -98,6 +224,4 @@ app.config(function($routeProvider) {
             .otherwise({
                 templateUrl : '404.html'
             })
-
-
     });

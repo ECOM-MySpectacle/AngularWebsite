@@ -2,16 +2,14 @@
     <h1>A la une</h1>
 
     <div ng-controller="CarouselDemoCtrl">
-        <div>
-            <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
-                <div uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
-                    <img ng-src="{{slide.image}}" style="width:100%; position:absolute; margin-left: -50%;">
-                    <img ng-src="{{slide.masque}}" style="width:100%; position:absolute; margin-left: -50%;">
-                    <div class="carousel-text">
-                        <div ng-include="slide.info"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
+         <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+             <div uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
+                 <img ng-src="{{slide.image}}" style="width:100%; position:absolute; margin-left: -50%;">
+                 <img ng-src="{{slide.masque}}" style="width:100%; position:absolute; margin-left: -50%;">
+                 <div class="carousel-text">
+                     <div ng-include="slide.info"></div>
+                 </div>
+             </div>
+         </div>
     </div>
 </div>
