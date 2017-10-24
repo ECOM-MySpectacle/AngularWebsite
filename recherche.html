@@ -1,11 +1,22 @@
+<div ng-controller="recherche">
 <div class="col-md-8 col-md-offset-1 core">
     <h1>Votre recherche</h1>
     <p> Affiner votre recherche avec les filtres à disposition sur la droite de l'écran </p>
+    <hr>
+    <div class="col-md-3 recherche-tile" ng-repeat="x in listeReponse">
+        <h3 style="text-align:center">{{x.name}}</h3>
+        <div class="recherche-tile-image">
+            <img src={{x.image}} style="width: inherit;">
+        </div>
+        <p>{{x.country}}</p>
+    </div>
+
+
 
 </div>
 
 
-<div class="col-md-2" ng-controller="recherche">
+<div class="col-md-2">
     <div class="well">Votre recherche :
         <h5 id="well-query"></h5>
     </div>
@@ -53,4 +64,5 @@
         <label class="btn btn-info btn-radiobut btn-block" ng-model="radioModel" uib-btn-radio="'artiste'">un artiste</label>
 
     </div>
+</div>
 </div>

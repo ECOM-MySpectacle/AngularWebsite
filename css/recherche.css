@@ -80,7 +80,6 @@ body {
 
 .carousel-inner {
     height: 60vh;
-    background-color: gray;
 }
 
 .carousel-imag {
@@ -152,8 +151,32 @@ body {
 }
 
 .btn-radiobut {
-    border-radius: 0px;
+    border-radius: 0;
     background-color: white;
     color: black;
     border-color: #dcdcdc;
+}
+
+.recherche-tile {
+    width: 300px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    padding: 0 0 0 0;
+    margin: 5px;
+    cursor:pointer
+}
+
+.recherche-tile-image {
+    width: inherit;
+    max-height: 160px;
+    overflow: hidden;
+}
+
+.recherche-tile:hover {
+    transition:0.15s linear all;
+    opacity:0.8;
+}
+
+.recherche-tile:active {
+    background-color: #82dbff;
 }

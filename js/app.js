@@ -26,11 +26,6 @@ app.controller('CarouselDemoCtrl', function ($scope) {
 
 
 app.controller("compteModal", ['$scope','$uibModal','$uibModalStack',function($scope,$uibModal,$uibModalStack){
-
-    $scope.$on('handleBroadcast', function() {
-        $scope.openModal('creationCompte.html', creationCompteController);
-    });
-
     $scope.openModal = function(url, controller){
         $uibModalStack.dismissAll('another modal just opened');
         $scope.modalInstance = $uibModal.open({
@@ -70,14 +65,33 @@ app.controller("connexionController", function($scope,$uibModalInstance){
         $uibModalInstance.close('save');
     };
 
-}   );
+});
+
+app.controller("tileController", function($scope,$uibModalInstance){
+
+    $scope.cancelModal = function(){
+        $uibModalInstance.dismiss('close');
+    };
+    $scope.connexion = function(){
+        $uibModalInstance.close('save');
+    };
+
+});
 
 
 app.controller('recherche', function ($scope, Restangular) {
 
-    if (document.getElementById("well-query")) {console.log(query);
+    if (document.getElementById("well-query")) {
         document.getElementById("well-query").innerHTML = query;
     }
+
+    $scope.listeReponse=[
+        {name:'Concert de Zaz',country:'Norway', image:'test/spectacle1.jpg', url:'test/spectacle1info.html'},
+        {name:'Soirée Pop-Shot',country:'Sweden', image:'test/spectacle2.jpg', url:'test/spectacle1info.html'},
+        {name:'Partiel d\'ALM',country:'Denmark', image:'test/spectacle3.jpg', url:'test/spectacle1info.html'},
+        {name:'Barnave',country:'Norway', image:'test/spectacle2.jpg', url:'test/spectacle1info.html'},
+        {name:'Le tumulte d\'un apothicaire',country:'Sweden', image:'test/spectacle3.jpg', url:'test/spectacle1info.html'},
+        {name:'Le Cuiseur de Riz',country:'Denmark', image:'test/spectacle1.jpg', url:'test/spectacle1info.html'}];
 
     $scope.regionDropdownModel = [];
     $scope.regionDropdownData = [
@@ -110,7 +124,7 @@ app.controller('recherche', function ($scope, Restangular) {
         if (e !== 13) return;
         query = document.getElementById("query").value;
 
-        if (document.getElementById("well-query")) {console.log(query);
+        if (document.getElementById("well-query")) {
             document.getElementById("well-query").innerHTML = query;
         }
 
@@ -120,6 +134,10 @@ app.controller('recherche', function ($scope, Restangular) {
             location.href = '#!recherche';
     };
 
+
+    /*
+        Gestion du date picker
+     */
     $scope.today = function() {
         $scope.dt = new Date();
     };
@@ -165,35 +183,20 @@ app.controller('recherche', function ($scope, Restangular) {
     $scope.format = $scope.formats[0];
     $scope.altInputFormats = ['M!/d!/yyyy'];
 
-    $scope.popup1 = {
-        opened: false
-    };
-
-    $scope.popup2 = {
-        opened: false
-    };
+    $scope.popup1 = {opened: false};
+    $scope.popup2 = {opened: false};
 
     var tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
     var afterTomorrow = new Date();
     afterTomorrow.setDate(tomorrow.getDate() + 1);
-    $scope.events = [
-        {
-            date: tomorrow,
-            status: 'full'
-        },
-        {
-            date: afterTomorrow,
-            status: 'partially'
-        }
-    ];
+    $scope.events = [{date: tomorrow, status: 'full'}, {date: afterTomorrow, status: 'partially'}];
 
     function getDayClass(data) {
         var date = data.date,
             mode = data.mode;
         if (mode === 'day') {
             var dayToCheck = new Date(date).setHours(0, 0, 0, 0);
-
             for (var i = 0; i < $scope.events.length; i++) {
                 var currentDay = new Date($scope.events[i].date).setHours(0, 0, 0, 0);
 
@@ -202,11 +205,10 @@ app.controller('recherche', function ($scope, Restangular) {
                 }
             }
         }
-
         return '';
     }
-
 });
+
 
 app.controller('panier', function ($scope, Restangular) {
 
