@@ -1,5 +1,6 @@
 var app = angular.module('app', ['ngAnimate', 'ngSanitize', 'ngRoute', 'restangular', 'ui.bootstrap', 'angularjs-dropdown-multiselect']);
 
+
 var query = "";
 
 app.controller('CarouselDemoCtrl', function ($scope) {
@@ -207,7 +208,9 @@ app.controller('recherche', function ($scope, Restangular) {
 
 });
 
+app.controller('panier', function ($scope, Restangular) {
 
+});
 
 
 
@@ -220,7 +223,9 @@ app.config(function($routeProvider) {
             .when('/recherche', {
                 templateUrl : 'recherche.html'
             })
-
+            .when('/panier', {
+                templateUrl : 'panier.html'
+            })
             .otherwise({
                 templateUrl : '404.html'
             })
