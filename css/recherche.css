@@ -76,6 +76,7 @@ body {
 
 .core {
     background-color: white;
+    user-select: none;
 }
 
 .carousel-inner {
@@ -159,6 +160,7 @@ body {
 
 .recherche-tile {
     width: 300px;
+    transition: 0.15s linear all;
     background-color: #f0f0f0;
     border-radius: 10px;
     padding: 0 0 0 0;
@@ -178,5 +180,5 @@ body {
 }
 
 .recherche-tile:active {
-    background-color: #82dbff;
+    background-color: #5fd6ff;
 }

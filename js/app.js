@@ -24,11 +24,11 @@ app.controller('CarouselDemoCtrl', function ($scope) {
     }
 });
 
-
-app.controller("compteModal", ['$scope','$uibModal','$uibModalStack',function($scope,$uibModal,$uibModalStack){
-    $scope.openModal = function(url, controller){
+app.service('modalService', function($uibModal,$uibModalStack){
+    var modalService = {};
+    modalService.openModal = function(url, controller){
         $uibModalStack.dismissAll('another modal just opened');
-        $scope.modalInstance = $uibModal.open({
+        modalService.modalInstance = $uibModal.open({
             ariaLabelledBy: 'modal-title',
             ariaDescribedBy: 'modal-body',
             templateUrl: url,
@@ -36,7 +36,15 @@ app.controller("compteModal", ['$scope','$uibModal','$uibModalStack',function($s
             controllerAs: '$ctrl',
             resolve: {}
         });
-    }
+    };
+    return modalService;
+});
+
+
+app.controller("compteModal", ['$scope','$uibModal','$uibModalStack','modalService',function($scope,$uibModal,$uibModalStack,modalService){
+    $scope.openModal = function(url, controller) {
+        modalService.openModal(url,controller);
+    };
 }]);
 
 app.controller("creationCompteController",function($scope,$uibModalInstance){
@@ -79,18 +87,22 @@ app.controller("tileController", function($scope,$uibModalInstance){
 });
 
 
-app.controller('recherche', function ($scope, Restangular) {
+app.controller('recherche', function ($scope,Restangular,modalService) {
 
     if (document.getElementById("well-query")) {
         document.getElementById("well-query").innerHTML = query;
     }
 
+    $scope.clickTile = function(url) {
+        modalService.openModal(url,'tileController');
+    };
+
     $scope.listeReponse=[
         {name:'Concert de Zaz',country:'Norway', image:'test/spectacle1.jpg', url:'test/spectacle1info.html'},
-        {name:'Soirée Pop-Shot',country:'Sweden', image:'test/spectacle2.jpg', url:'test/spectacle1info.html'},
-        {name:'Partiel d\'ALM',country:'Denmark', image:'test/spectacle3.jpg', url:'test/spectacle1info.html'},
-        {name:'Barnave',country:'Norway', image:'test/spectacle2.jpg', url:'test/spectacle1info.html'},
-        {name:'Le tumulte d\'un apothicaire',country:'Sweden', image:'test/spectacle3.jpg', url:'test/spectacle1info.html'},
+        {name:'Soirée Pop-Shot',country:'Sweden', image:'test/spectacle2.jpg', url:'test/spectacle2info.html'},
+        {name:'Partiel d\'ALM',country:'Denmark', image:'test/spectacle3.jpg', url:'test/spectacle3info.html'},
+        {name:'Barnave',country:'Norway', image:'test/spectacle2.jpg', url:'test/spectacle2info.html'},
+        {name:'Le tumulte d\'un apothicaire',country:'Sweden', image:'test/spectacle3.jpg', url:'test/spectacle3info.html'},
         {name:'Le Cuiseur de Riz',country:'Denmark', image:'test/spectacle1.jpg', url:'test/spectacle1info.html'}];
 
     $scope.regionDropdownModel = [];
