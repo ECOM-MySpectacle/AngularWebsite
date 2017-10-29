@@ -1,8 +1,8 @@
-<div ng-controller="recherche">
+<div>
 <div class="col-md-8 col-md-offset-1 core">
     <h1>Votre recherche</h1>
     <hr>
-    <div class="col-md-3 recherche-tile" ng-repeat="x in listeReponse" ng-click="clickTile(x.url)">
+    <div class="col-md-3 recherche-tile" ng-repeat="x in listeReponse" ng-click="openModal('spectacleModal.html', 'tileController', x.url)">
         <h3 style="text-align:center">{{x.name}}</h3>
         <div class="recherche-tile-image">
             <img src={{x.image}} style="width: inherit;" draggable="false">

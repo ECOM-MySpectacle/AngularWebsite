@@ -76,7 +76,7 @@ body {
 
 .core {
     background-color: white;
-    user-select: none;
+    box-shadow: 0 0 10px 5px #e5e5e5;
 }
 
 .carousel-inner {

@@ -1,7 +1,22 @@
-var app = angular.module('app', ['ngAnimate', 'ngSanitize', 'ngRoute', 'restangular', 'ui.bootstrap', 'angularjs-dropdown-multiselect']);
+var app = angular.module('app', ['ngCart', 'ngAnimate', 'ngSanitize', 'ngRoute', 'restangular', 'ui.bootstrap', 'angularjs-dropdown-multiselect']);
 
-
-var query = "";
+app.service('modalService', function($uibModal,$uibModalStack){
+    var modalService = {};
+    modalService.openModal = function(url, controller, spectacleUrl){
+        $uibModalStack.dismissAll('another modal just opened');
+        modalService.modalInstance = $uibModal.open({
+            ariaLabelledBy: 'modal-title',
+            ariaDescribedBy: 'modal-body',
+            templateUrl: url,
+            controller: controller,
+            controllerAs: '$ctrl',
+            resolve: {
+                spectacleUrl: function() {return spectacleUrl;}
+            }
+        });
+    };
+    return modalService;
+});
 
 app.controller('CarouselDemoCtrl', function ($scope) {
     $scope.myInterval = 5000;
@@ -24,31 +39,23 @@ app.controller('CarouselDemoCtrl', function ($scope) {
     }
 });
 
-app.service('modalService', function($uibModal,$uibModalStack){
-    var modalService = {};
-    modalService.openModal = function(url, controller){
-        $uibModalStack.dismissAll('another modal just opened');
-        modalService.modalInstance = $uibModal.open({
-            ariaLabelledBy: 'modal-title',
-            ariaDescribedBy: 'modal-body',
-            templateUrl: url,
-            controller : controller,
-            controllerAs: '$ctrl',
-            resolve: {}
-        });
-    };
-    return modalService;
-});
-
-
-app.controller("compteModal", ['$scope','$uibModal','$uibModalStack','modalService',function($scope,$uibModal,$uibModalStack,modalService){
+app.controller("connexionController", function($scope,$uibModalInstance,modalService){
     $scope.openModal = function(url, controller) {
         modalService.openModal(url,controller);
     };
-}]);
+
+    $scope.cancelModal = function(){
+        $uibModalInstance.dismiss('close');
+    };
+    $scope.connexion = function(){
+        var mail = document.getElementById('email-form').value;
+        var pwd = document.getElementById('pwd-form').value;
+        console.log('mail: '+mail+' - pwd: '+pwd);
+        $uibModalInstance.close('save');
+    };
+});
 
 app.controller("creationCompteController",function($scope,$uibModalInstance){
-
     $scope.cancelModal = function(){
         $uibModalInstance.dismiss('close');
     };
@@ -58,24 +65,14 @@ app.controller("creationCompteController",function($scope,$uibModalInstance){
         console.log('mail: '+mail+' - pwd: '+pwd);
         $uibModalInstance.close('save');
     };
-
 });
 
-app.controller("connexionController", function($scope,$uibModalInstance){
+app.controller("tileController", function($scope,$uibModalInstance,spectacleUrl,ngCart){
+    $scope.selectedSpectacleUrl = spectacleUrl;
 
-    $scope.cancelModal = function(){
-        $uibModalInstance.dismiss('close');
+    $scope.addToCart = function() {
+        ngCart.addItem(spectacleUrl, spectacleUrl, 7.99, 1);
     };
-    $scope.connexion = function(){
-        var mail = document.getElementById('email-form').value;
-        var pwd = document.getElementById('pwd-form').value;
-        console.log('mail: '+mail+' - pwd: '+pwd);
-        $uibModalInstance.close('save');
-    };
-
-});
-
-app.controller("tileController", function($scope,$uibModalInstance){
 
     $scope.cancelModal = function(){
         $uibModalInstance.dismiss('close');
@@ -83,18 +80,14 @@ app.controller("tileController", function($scope,$uibModalInstance){
     $scope.connexion = function(){
         $uibModalInstance.close('save');
     };
-
 });
 
 
-app.controller('recherche', function ($scope,Restangular,modalService) {
+app.controller('mainController', ['$scope', '$http', 'ngCart', 'modalService', function($scope,$uibModal,$uibModalStack,modalService, $http, ngCart) {
+    $scope.query = "";
 
-    if (document.getElementById("well-query")) {
-        document.getElementById("well-query").innerHTML = query;
-    }
-
-    $scope.clickTile = function(url) {
-        modalService.openModal(url,'tileController');
+    $scope.openModal = function(url, controller, spectacleUrl) {
+        modalService.openModal(url, controller, spectacleUrl);
     };
 
     $scope.listeReponse=[
@@ -134,10 +127,10 @@ app.controller('recherche', function ($scope,Restangular,modalService) {
 
     $scope.rechercher = function (e) {
         if (e !== 13) return;
-        query = document.getElementById("query").value;
 
+        $scope.query = document.getElementById("query").value;
         if (document.getElementById("well-query")) {
-            document.getElementById("well-query").innerHTML = query;
+            document.getElementById("well-query").innerHTML = $scope.query;
         }
 
         //Restangular.all('students');
@@ -219,7 +212,7 @@ app.controller('recherche', function ($scope,Restangular,modalService) {
         }
         return '';
     }
-});
+}]);
 
 
 app.controller('panier', function ($scope, Restangular) {
