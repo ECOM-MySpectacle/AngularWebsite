@@ -18,6 +18,7 @@ app.service('modalService', function($uibModal,$uibModalStack){
     return modalService;
 });
 
+
 app.controller('CarouselDemoCtrl', function ($scope) {
     $scope.myInterval = 5000;
     $scope.noWrapSlides = false;
