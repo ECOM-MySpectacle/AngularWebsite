@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngCart','ngAnimate','ngSanitize','ngRoute','restangular','ui.bootstrap','angularjs-dropdown-multiselect']);
+var app = angular.module('app', ['ngMaterial','ngCart','ngAnimate','ngSanitize','ngRoute','restangular','ui.bootstrap','angularjs-dropdown-multiselect']);
 
 app.service('modalService', function($uibModal,$uibModalStack){
     var modalService = {};
@@ -194,7 +194,7 @@ app.controller('recherche', function($scope) {
     }
 });
 
-app.controller('mainController', ['$scope', '$http', 'ngCart', 'modalService', '$location', function($scope,$uibModal,$uibModalStack,modalService,$location,$http,ngCart) {
+app.controller('mainController', ['$scope', '$http', 'ngCart', 'modalService', '$location', function($scope,$uibModal,$uibModalStack,modalService,$location) {
     $scope.query = "";
     $scope.rechercheType = "evenement";
 

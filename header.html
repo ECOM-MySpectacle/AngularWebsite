@@ -1,5 +1,5 @@
 <header>
-    <nav class="navbar navbar-inverse navbar-fixed-top navbar-home">
+    <nav class="navbar navbar-header navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand logo" href="#">
@@ -7,15 +7,14 @@
                 </a>
             </div>
 
-            <ul class="nav navbar-nav navbar-right navbar-button">
+            <ul class="nav navbar-nav navbar-right">
+                <li><button class="navbar-button mes-billets-but"><a href="#!panier"> Mes billets</a></button></li>
                 <li>
-                    <button class="navbar-inverse navbar-button mon-compte-but" ng-click="openModal('connexionModal.html', 'connexionController')">
+                    <button class="navbar-button" ng-click="openModal('connexionModal.html', 'connexionController')">
                         <span class="glyphicon glyphicon-user"></span> Mon compte</button>
                 </li>
-                <li><a href="#!panier"><span class="glyphicon glyphicon-shopping-cart"></span> Panier</a></li>
             </ul>
 
-            <a href="#!panier" class="navbar-right btn mes-billets-but"> Mes billets</a>
 
             <div class="col-sm-4 recherche">
                 <div class="input-group group_query">

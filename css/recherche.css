@@ -1,4 +1,15 @@
-.navbar-home {
+:root {
+    --head-color:#233237;
+    --head-color-hover: #3b555d;
+    --second-color: #ff1000;
+    --background: #ffffff;
+    --button-color:#3fb0ac;
+    --button-color-hover: #48cbc6;
+
+}
+
+.navbar-header {
+    background-color: var(--head-color);
     height: 65px;
 }
 
@@ -7,13 +18,34 @@
 }
 
 .navbar-button {
+    letter-spacing: 2px;
     height: 65px;
+    outline:none;
+    margin: 0 10px 0 10px;
+    background-color: transparent;
+    border-color: transparent;
+    font-size: 19px;
+    color: white;
+    transition: 0.15s ease;
+}
+.navbar-button:hover {
+    transition: 0.15s ease;
+    background-color: var(--head-color-hover);
 }
 
-.navbar-button > li > a {
-    height: 65px;
-    padding-top: 22px;
-    font-size: 16px;
+.navbar-button > a {
+    font-size: 22px;
+    margin: 0 20px 0 20px;
+    text-decoration: none;
+    color: white;
+}
+
+.mes-billets-but {
+    background-color: var(--button-color);
+}
+.mes-billets-but:hover {
+    transition: 0.15s ease;
+    background-color: var(--button-color-hover);
 }
 
 .recherche {
@@ -27,58 +59,26 @@
 }
 
 .button-query {
+    transition: 0.15s ease;
     height: 45px;
     width: 45px;
-    background-color: #47d4ff;
-    border-color: #47d4ff;
+    background-color: var(--button-color);
+    color: white;
 }
 
 .button-query:hover{
-     background:#82dbff;
+    transition: 0.15s ease;
+     background: var(--button-color-hover);
+    color: white;
 }
 
-.button-query:focus{
-    background:#82dbff;
+html {
+    background-color: inherit;
 }
-
-.mes-billets-but {
-    margin-top: 13px;
-    background-color: #47d4ff;
-    border-color: transparent;
-    border-radius: 5px;
-    font-size: 18px;
-    color: black;
-}
-.mes_billets_but:hover {
-    background-color: #82dbff;
-}
-
-.mon-compte-but {
-    outline:none;
-    margin-left: 10px;
-    background-color: transparent;
-    border-color: transparent;
-    font-size: 16px;
-    color: #9d9d9d;
-}
-.mon-compte-but:hover {
-    color: #CCCCCC;
-    background-color: #303030;
-}
-.mon-compte-but:active {
-    background-color: transparent;
-}
-
 
 body {
-    background-color: #f0f0f0;
+    background-color: var(--background);
     margin-top: 65px;
-}
-
-.core {
-    background-color: white;
-    box-shadow: 0 0 10px 5px #e5e5e5;
-    margin-top: 10px;
 }
 
 .carousel-inner {
@@ -94,6 +94,7 @@ body {
     position: absolute;
     z-index: 2;
 }
+
 
 .carousel-text {
     text-align: left;
@@ -141,13 +142,6 @@ body {
     color: gray;
 }
 
-.navbar-inverse-perso {
-    background-color: #222;
-    border-color: #080808;
-    display: block;
-    position: relative;
-}
-
 .social-but {
     margin-top: 10px;
     margin-bottom: 5px;
@@ -162,12 +156,12 @@ body {
 
 .recherche-tile {
     width: 300px;
-    transition: 0.15s linear all;
+    transition: 0.1s linear all;
     background-color: #f0f0f0;
-    border-radius: 10px;
     padding: 0 0 0 0;
     margin: 5px;
-    cursor:pointer
+    cursor:pointer;
+    outline: none;
 }
 
 .recherche-tile-image {
@@ -177,11 +171,49 @@ body {
 }
 
 .recherche-tile:hover {
-    transition:0.15s linear all;
+    transition:0.1s linear all;
     opacity:0.9;
-    box-shadow: 0 0 5px 2px #5fd6ff;
+    box-shadow: 0 0 5px 2px grey;
+    transform: scale(1.02,1.02);
 }
 
 .recherche-tile:active {
-    background-color: #5fd6ff;
+    background-color: grey;
+}
+
+.recherche-param {
+    box-shadow: 0 0 2px #656565;
+    margin-bottom: 10px;
+}
+
+.recherche-param-titre {
+    background-color: var(--head-color);
+    color: white;
+    padding: 10px 10px 10px 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.recherche-param-button {
+    transition: 0.15s ease;
+    background-color: white;
+    display: block;
+    width: 100%;
+    border: none;
+    font-size: 16px;
+    padding: 10px 0 10px 0;
+    outline: none;
+}
+
+.recherche-param-button:hover {
+    transition: 0.15s ease;
+    background-color: #cbcbcb;
+}
+
+.recherche-param-radio {
+    text-align: center;
+}
+.recherche-param-radio.active {
+    background-color: var(--button-color);
+    color: white;
 }

@@ -2,8 +2,9 @@
 
     <ng-include src="selectedSpectacleUrl"> </ng-include>
 
-    <div class="container-fluid">
+    <div class="container-fluid" style="margin-top: 5px">
         <row>
+            <input type="number" name="quantity" min="1" max="42" value=1 style="margin-right: 10px">
             <button type="button" class="btn btn-default" ng-click="addToCart()">Ajouter au panier</button>
         </row>
     </div>
