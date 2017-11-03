@@ -1,6 +1,6 @@
-<div>
+<div ng-controller="recherche">
 <div class="col-md-8 col-md-offset-1 core">
-    <h1>Votre recherche</h1>
+    <h2 id="well-query">Votre recherche</h2>
     <hr>
     <div class="col-md-3 recherche-tile" ng-repeat="x in listeReponse" ng-click="openModal('spectacleModal.html', 'tileController', x.url)">
         <h3 style="text-align:center">{{x.name}}</h3>
@@ -9,17 +9,11 @@
         </div>
         <p>{{x.country}}</p>
     </div>
-
-
-
 </div>
 
 
 <div class="col-md-2">
-    <div class="well">Votre recherche :
-        <h5 id="well-query"></h5>
-    </div>
-    <div class="btn-group btn-block core">
+    <div class="core">
 
         <span class=" label navbar-inverse-perso">Régions</span>
 
@@ -51,16 +45,15 @@
           </span>
             </p>
         </div>
-
     </div>
 
-    <div class="btn-group btn-block core">
+    <div class="core">
 
         <span class="label navbar-inverse-perso">Rechercher ...</span>
 
-        <label class="btn btn-info btn-radiobut btn-block" ng-model="radioModel" uib-btn-radio="'evenement'">un evenement</label>
-        <label class="btn btn-info btn-radiobut btn-block" ng-model="radioModel" uib-btn-radio="'salle'">une salle</label>
-        <label class="btn btn-info btn-radiobut btn-block" ng-model="radioModel" uib-btn-radio="'artiste'">un artiste</label>
+        <label class="btn btn-info btn-radiobut btn-block" ng-click="setRechercheType('evenement')" ng-model="rechercheType" uib-btn-radio="'evenement'">un evenement</label>
+        <label class="btn btn-info btn-radiobut btn-block" ng-click="setRechercheType('salle')" ng-model="rechercheType" uib-btn-radio="'salle'">une salle</label>
+        <label class="btn btn-info btn-radiobut btn-block" ng-click="setRechercheType('artiste')" ng-model="rechercheType" uib-btn-radio="'artiste'">un artiste</label>
 
     </div>
 </div>

@@ -69,6 +69,7 @@
     background-color: transparent;
 }
 
+
 body {
     background-color: #f0f0f0;
     margin-top: 65px;
@@ -77,6 +78,7 @@ body {
 .core {
     background-color: white;
     box-shadow: 0 0 10px 5px #e5e5e5;
+    margin-top: 10px;
 }
 
 .carousel-inner {
@@ -176,7 +178,8 @@ body {
 
 .recherche-tile:hover {
     transition:0.15s linear all;
-    opacity:0.8;
+    opacity:0.9;
+    box-shadow: 0 0 5px 2px #5fd6ff;
 }
 
 .recherche-tile:active {

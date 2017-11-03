@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngCart', 'ngAnimate', 'ngSanitize', 'ngRoute', 'restangular', 'ui.bootstrap', 'angularjs-dropdown-multiselect']);
+var app = angular.module('app', ['ngCart','ngAnimate','ngSanitize','ngRoute','restangular','ui.bootstrap','angularjs-dropdown-multiselect']);
 
 app.service('modalService', function($uibModal,$uibModalStack){
     var modalService = {};
@@ -84,12 +84,8 @@ app.controller("tileController", function($scope,$uibModalInstance,spectacleUrl,
 });
 
 
-app.controller('mainController', ['$scope', '$http', 'ngCart', 'modalService', function($scope,$uibModal,$uibModalStack,modalService, $http, ngCart) {
-    $scope.query = "";
-
-    $scope.openModal = function(url, controller, spectacleUrl) {
-        modalService.openModal(url, controller, spectacleUrl);
-    };
+app.controller('recherche', function($scope) {
+    document.getElementById("well-query").innerHTML = "Votre Recherche : "+ $scope.query;
 
     $scope.listeReponse=[
         {name:'Concert de Zaz',country:'Norway', image:'test/spectacle1.jpg', url:'test/spectacle1info.html'},
@@ -114,7 +110,7 @@ app.controller('mainController', ['$scope', '$http', 'ngCart', 'modalService', f
         {id: 11, label: "Occitanie"},
         {id: 12, label: "Pays de la Loire"},
         {id: 13, label: "Provence-Alpes-Côte d\'Azur"}
-        ];
+    ];
     $scope.regionDropdownSettings = {
         showCheckAll: false,
         showUncheckAll: false,
@@ -123,23 +119,6 @@ app.controller('mainController', ['$scope', '$http', 'ngCart', 'modalService', f
             return itemText;
         }
     };
-
-    $scope.radioModel = "evenement";
-
-    $scope.rechercher = function (e) {
-        if (e !== 13) return;
-
-        $scope.query = document.getElementById("query").value;
-        if (document.getElementById("well-query")) {
-            document.getElementById("well-query").innerHTML = $scope.query;
-        }
-
-        //Restangular.all('students');
-
-        if (location.href.slice(-10)!=='/recherche')
-            location.href = '#!recherche';
-    };
-
 
     /*
         Gestion du date picker
@@ -213,6 +192,33 @@ app.controller('mainController', ['$scope', '$http', 'ngCart', 'modalService', f
         }
         return '';
     }
+});
+
+app.controller('mainController', ['$scope', '$http', 'ngCart', 'modalService', '$location', function($scope,$uibModal,$uibModalStack,modalService,$location,$http,ngCart) {
+    $scope.query = "";
+    $scope.rechercheType = "evenement";
+
+    $scope.setRechercheType = function(type) {
+        $scope.rechercheType=type;
+    };
+
+    $scope.openModal = function(url, controller, spectacleUrl) {
+        modalService.openModal(url, controller, spectacleUrl);
+    };
+
+    $scope.rechercher = function (e) {
+        if (e !== 13 || document.getElementById("query").value==="") return;
+
+        $scope.query = document.getElementById("query").value;
+
+        if (document.getElementById("well-query")) {
+            document.getElementById("well-query").innerHTML = "Votre Recherche : "+ $scope.query;
+        }
+
+        //Restangular.all('students');
+        $location.url("recherche");
+        $location.search({search: $scope.query});
+    };
 }]);
 
 
@@ -227,9 +233,9 @@ app.config(function($routeProvider) {
             .when('/', {
                 templateUrl : 'accueil.html'
             })
-
             .when('/recherche', {
                 templateUrl : 'recherche.html'
+
             })
             .when('/panier', {
                 templateUrl : 'panier.html'
