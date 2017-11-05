@@ -69,7 +69,7 @@ app.controller("creationCompteController",function($scope,$uibModalInstance){
     };
 });
 
-app.controller("tileController", function($scope,$uibModalInstance,spectacleUrl,ngCart,$uibModalStack){
+app.controller("tileController", function($scope,$uibModalInstance,spectacleUrl,ngCart,$mdToast){
     $scope.selectedSpectacleUrl = spectacleUrl;
 
     $scope.quantite = 1;
@@ -83,14 +83,19 @@ app.controller("tileController", function($scope,$uibModalInstance,spectacleUrl,
     };
 
     $scope.addItToCart = function() {
-        $scope.addToCart($scope.selectedSpectacleUrl, $scope.selectedSpectacleUrl, 7.99, $scope.quantite);
-        $uibModalStack.dismissAll('transaction finished');
-        document.getElementById('fab').innerHTML = "+"+$scope.quantite;
-        document.getElementById('fab')
-    };
-
-    $scope.addToCart = function(id, name, price, quantity) {
-        ngCart.addItem(id, name, price, quantity);
+        ngCart.addItem($scope.selectedSpectacleUrl, $scope.selectedSpectacleUrl, 7.99, $scope.quantite);
+        var toast = $mdToast.simple()
+            .action('ANNULER')
+            .highlightAction(true)
+            .position('top right')
+            .parent(document.getElementById('modal-toast'))
+            .textContent($scope.quantite+' élément ajouté');
+        if ($scope.quantite>1) toast.textContent($scope.quantite+' éléments ajoutés');
+        $mdToast.show(toast).then(function(response) {
+            if ( response === 'ok' ) {
+                ngCart.addItem($scope.selectedSpectacleUrl, $scope.selectedSpectacleUrl, 7.99, -$scope.quantite);
+            }
+        });
     };
 
     $scope.cancelModal = function(){
@@ -102,10 +107,25 @@ app.controller("tileController", function($scope,$uibModalInstance,spectacleUrl,
 });
 
 
-app.controller('recherche', function($scope) {
-    document.getElementById("well-query").innerHTML = "Votre Recherche : "+ $scope.query;
+app.controller('recherche', function($scope,$location) {
+    $scope.query = $location.search().search;
+    $scope.page = $location.search().page;
+
+    $scope.pageChanged = function() {
+        $scope.rechercher(13,$scope.page);
+    };
 
     $scope.listeReponse=[
+        {name:'Concert de Zaz',country:'Norway', image:'test/spectacle1.jpg', url:'test/spectacle1info.html'},
+        {name:'Soirée Pop-Shot',country:'Sweden', image:'test/spectacle2.jpg', url:'test/spectacle2info.html'},
+        {name:'Partiel d\'ALM',country:'Denmark', image:'test/spectacle3.jpg', url:'test/spectacle3info.html'},
+        {name:'Concert de Zaz',country:'Norway', image:'test/spectacle1.jpg', url:'test/spectacle1info.html'},
+        {name:'Soirée Pop-Shot',country:'Sweden', image:'test/spectacle2.jpg', url:'test/spectacle2info.html'},
+        {name:'Partiel d\'ALM',country:'Denmark', image:'test/spectacle3.jpg', url:'test/spectacle3info.html'},
+        {name:'Concert de Zaz',country:'Norway', image:'test/spectacle1.jpg', url:'test/spectacle1info.html'},
+        {name:'Soirée Pop-Shot',country:'Sweden', image:'test/spectacle2.jpg', url:'test/spectacle2info.html'},
+        {name:'Partiel d\'ALM',country:'Denmark', image:'test/spectacle3.jpg', url:'test/spectacle3info.html'},
+
         {name:'Concert de Zaz',country:'Norway', image:'test/spectacle1.jpg', url:'test/spectacle1info.html'},
         {name:'Soirée Pop-Shot',country:'Sweden', image:'test/spectacle2.jpg', url:'test/spectacle2info.html'},
         {name:'Partiel d\'ALM',country:'Denmark', image:'test/spectacle3.jpg', url:'test/spectacle3info.html'},
@@ -133,7 +153,7 @@ app.controller('recherche', function($scope) {
         showCheckAll: false,
         showUncheckAll: false,
         smartButtonMaxItems: 3,
-        smartButtonTextConverter: function(itemText, originalItem) {
+        smartButtonTextConverter: function(itemText) {
             return itemText;
         }
     };
@@ -224,18 +244,13 @@ app.controller('mainController', ['$scope', '$http', 'ngCart', 'modalService', '
         modalService.openModal(url, controller, size, spectacleUrl);
     };
 
-    $scope.rechercher = function (e) {
+    $scope.rechercher = function (e,page) {
         if (e !== 13 || document.getElementById("query").value==="") return;
 
         $scope.query = document.getElementById("query").value;
 
-        if (document.getElementById("well-query")) {
-            document.getElementById("well-query").innerHTML = "Votre Recherche : "+ $scope.query;
-        }
-
         //Restangular.all('students');
-        $location.url("recherche");
-        $location.search({search: $scope.query});
+        $location.url("recherche?search="+$scope.query+"&page="+page);
     };
 
     $scope.gotoPage = function(page) {

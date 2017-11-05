@@ -1,7 +1,8 @@
 <div ng-controller="recherche">
 
 <div class="col-md-8 col-md-offset-1">
-    <h2 id="well-query">Votre recherche</h2>
+    <h2 id="well-query">Votre Recherche :
+    <span ng-bind="query"></span></h2>
     <hr>
     <div class="col-md-3 recherche-tile" ng-repeat="x in listeReponse" ng-click="openModal('spectacleModal.html', 'tileController','lg', x.url)">
         <div class="recherche-tile-image">
@@ -9,6 +10,10 @@
         </div>
         <h3 style="margin: 5px">{{x.name}}</h3>
         <p style="margin: 5px">{{x.country}}</p>
+    </div>
+    <div class="pager">
+        <ul uib-pagination ng-model="page" total-items="8" items-per-page="1" direction-links="false" ng-change="pageChanged()"></ul>
+        <hr>
     </div>
 </div>
 
