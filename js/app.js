@@ -2,7 +2,7 @@ var app = angular.module('app', ['ngMaterial','ngCart','ngAnimate','ngSanitize',
 
 app.service('modalService', function($uibModal,$uibModalStack){
     var modalService = {};
-    modalService.openModal = function(url, controller, spectacleUrl){
+    modalService.openModal = function(url, controller, size, spectacleUrl){
         $uibModalStack.dismissAll('another modal just opened');
         modalService.modalInstance = $uibModal.open({
             ariaLabelledBy: 'modal-title',
@@ -12,7 +12,8 @@ app.service('modalService', function($uibModal,$uibModalStack){
             controllerAs: '$ctrl',
             resolve: {
                 spectacleUrl: function() {return spectacleUrl;}
-            }
+            },
+            size: size
         });
     };
     return modalService;
@@ -68,11 +69,28 @@ app.controller("creationCompteController",function($scope,$uibModalInstance){
     };
 });
 
-app.controller("tileController", function($scope,$uibModalInstance,spectacleUrl,ngCart){
+app.controller("tileController", function($scope,$uibModalInstance,spectacleUrl,ngCart,$uibModalStack){
     $scope.selectedSpectacleUrl = spectacleUrl;
 
-    $scope.addToCart = function() {
-        ngCart.addItem(spectacleUrl, spectacleUrl, 7.99, 1);
+    $scope.quantite = 1;
+
+    $scope.plusUn = function() {
+        $scope.quantite++;
+    };
+
+    $scope.moinsUn = function() {
+        if ($scope.quantite>0) $scope.quantite--;
+    };
+
+    $scope.addItToCart = function() {
+        $scope.addToCart($scope.selectedSpectacleUrl, $scope.selectedSpectacleUrl, 7.99, $scope.quantite);
+        $uibModalStack.dismissAll('transaction finished');
+        document.getElementById('fab').innerHTML = "+"+$scope.quantite;
+        document.getElementById('fab')
+    };
+
+    $scope.addToCart = function(id, name, price, quantity) {
+        ngCart.addItem(id, name, price, quantity);
     };
 
     $scope.cancelModal = function(){
@@ -202,8 +220,8 @@ app.controller('mainController', ['$scope', '$http', 'ngCart', 'modalService', '
         $scope.rechercheType=type;
     };
 
-    $scope.openModal = function(url, controller, spectacleUrl) {
-        modalService.openModal(url, controller, spectacleUrl);
+    $scope.openModal = function(url, controller, size, spectacleUrl) {
+        modalService.openModal(url, controller, size, spectacleUrl);
     };
 
     $scope.rechercher = function (e) {
@@ -219,6 +237,10 @@ app.controller('mainController', ['$scope', '$http', 'ngCart', 'modalService', '
         $location.url("recherche");
         $location.search({search: $scope.query});
     };
+
+    $scope.gotoPage = function(page) {
+        $location.url(page);
+    }
 }]);
 
 

@@ -18,6 +18,7 @@
 }
 
 .navbar-button {
+    text-align: center;
     letter-spacing: 2px;
     height: 65px;
     outline:none;
@@ -29,22 +30,15 @@
     transition: 0.15s ease;
 }
 .navbar-button:hover {
-    transition: 0.15s ease;
     background-color: var(--head-color-hover);
-}
-
-.navbar-button > a {
-    font-size: 22px;
-    margin: 0 20px 0 20px;
-    text-decoration: none;
-    color: white;
+    color:white;
 }
 
 .mes-billets-but {
+    font-size: 22px;
     background-color: var(--button-color);
 }
 .mes-billets-but:hover {
-    transition: 0.15s ease;
     background-color: var(--button-color-hover);
 }
 
@@ -67,18 +61,41 @@
 }
 
 .button-query:hover{
-    transition: 0.15s ease;
      background: var(--button-color-hover);
     color: white;
 }
 
 html {
     background-color: inherit;
+    overflow-y:scroll;
 }
 
 body {
     background-color: var(--background);
     margin-top: 65px;
+}
+
+.cartFab {
+    transition: 0.15s ease;
+    line-height: 7.5rem;
+    min-width: 0;
+    width: 7rem;
+    height: 7rem;
+    background-color: var(--button-color);
+    border-radius: 50%;
+    cursor: pointer;
+    color: white;
+    text-align: center;
+    box-shadow: 0 3px 5px 0 rgba(0,0,0,.26);
+    font-size: 28px;
+    position: fixed;
+    bottom: 8%;
+    right: 5%;
+    outline:none;
+}
+
+.cartFab:hover {
+    background-color: var(--button-color-hover);
 }
 
 .carousel-inner {
@@ -155,7 +172,7 @@ body {
 }
 
 .recherche-tile {
-    width: 300px;
+    width: 32%;
     transition: 0.1s linear all;
     background-color: #f0f0f0;
     padding: 0 0 0 0;
@@ -165,20 +182,19 @@ body {
 }
 
 .recherche-tile-image {
-    width: inherit;
+    width: 100%;
     max-height: 160px;
     overflow: hidden;
 }
 
 .recherche-tile:hover {
-    transition:0.1s linear all;
     opacity:0.9;
     box-shadow: 0 0 5px 2px grey;
     transform: scale(1.02,1.02);
 }
 
 .recherche-tile:active {
-    background-color: grey;
+    background-color: var(--button-color);
 }
 
 .recherche-param {
@@ -206,7 +222,6 @@ body {
 }
 
 .recherche-param-button:hover {
-    transition: 0.15s ease;
     background-color: #cbcbcb;
 }
 
@@ -216,4 +231,65 @@ body {
 .recherche-param-radio.active {
     background-color: var(--button-color);
     color: white;
+}
+
+.tileModalLeft img {
+    border-radius: 3px;
+    box-shadow: 0 3px 5px 0 rgba(0,0,0,.26);
+    max-width:100%;max-height:100%;
+}
+
+.tileModalLeft h6 {
+    color:grey;
+    margin-top: 20px;
+    font-size: 15px;
+    user-select: none;
+}
+.tileModalLeft h1 {
+    margin-top: 10px;
+}
+
+.tileModalQuantity {
+    float:right;
+    user-select: none;
+}
+
+.tileModalInput{
+    transition: 0.15s ease;
+    width: 50px;
+    text-align: center;
+    font-size: 17px;
+    outline: none;
+    -moz-appearance: textfield;
+    border: 0 solid var(--button-color);
+}
+
+.tileModalInput:focus {
+    border-bottom-width: 2px;
+}
+
+.tileModalInput::-webkit-outer-spin-button,.tileModalInput::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.tileModalQuantityButton:hover {
+    cursor: pointer;
+}
+
+.tileModalPrice {
+    float:left;
+}
+
+.tileModaladdToCart {
+    transition: 0.15s ease;
+    background-color: var(--button-color);
+    border: none;
+    color: white;
+    padding: 8px;
+    font-size: 23px;
+    margin-top: 10px;
+}
+.tileModaladdToCart:hover {
+    background-color: var(--button-color-hover);
 }

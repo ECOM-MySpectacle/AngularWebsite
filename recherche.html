@@ -3,7 +3,7 @@
 <div class="col-md-8 col-md-offset-1">
     <h2 id="well-query">Votre recherche</h2>
     <hr>
-    <div class="col-md-3 recherche-tile" ng-repeat="x in listeReponse" ng-click="openModal('spectacleModal.html', 'tileController', x.url)">
+    <div class="col-md-3 recherche-tile" ng-repeat="x in listeReponse" ng-click="openModal('spectacleModal.html', 'tileController','lg', x.url)">
         <div class="recherche-tile-image">
             <img src={{x.image}} style="width: inherit;" draggable="false">
         </div>
@@ -58,4 +58,7 @@
 
     </div>
 </div>
+    <div class="cartFab" ng-click="gotoPage('panier')" id="fab">
+        <span class="glyphicon glyphicon-shopping-cart"></span>
+    </div>
 </div>

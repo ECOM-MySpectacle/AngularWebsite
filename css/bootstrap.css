@@ -5981,9 +5981,12 @@ button.close {
     width: 300px;
   }
 }
-@media (min-width: 992px) {
+@media (min-width: 1500px) {
   .modal-lg {
-    width: 900px;
+    width: 1500px;
+  }
+  .modal-content {
+    border-radius: 0;
   }
 }
 .tooltip {
