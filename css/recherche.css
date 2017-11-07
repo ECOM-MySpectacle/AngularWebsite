@@ -172,18 +172,17 @@ body {
 }
 
 .recherche-tile {
-    width: 32%;
     transition: 0.1s linear all;
     background-color: #f0f0f0;
     padding: 0 0 0 0;
-    margin: 5px;
     cursor:pointer;
     outline: none;
+    height: 242px;
 }
 
 .recherche-tile-image {
     width: 100%;
-    max-height: 160px;
+    height: 160px;
     overflow: hidden;
 }
 
