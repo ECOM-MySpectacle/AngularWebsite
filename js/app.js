@@ -254,7 +254,7 @@ app.controller('mainController', ['$scope', '$http', 'ngCart', 'modalService', '
     };
 
     $scope.rechercher = function (e,page) {
-        if (e !== 13 || document.getElementById("query").value==="") return;
+        if (e !== 13) return;
 
         $scope.query = document.getElementById("query").value;
 
