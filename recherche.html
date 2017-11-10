@@ -1,75 +1,60 @@
-<div ng-controller="recherche">
+<div ng-controller="recherche" style="margin-left: 280px">
 
-<div class="col-md-8 col-md-offset-1">
-    <div class="col-md-12">
-    <h2 id="well-query">Votre Recherche :
-    <span ng-bind="query"></span></h2>
-    <hr>
-    <div class="col-lg-3 col-sm-4" style="padding:5px;" ng-repeat="x in listeReponse">
-        <div class="recherche-tile" ng-click="openModal('spectacleModal.html', 'tileController','lg', x.url)">
-            <div class="recherche-tile-image">
-                <img src={{x.image}} style="width: inherit;" draggable="false">
+    <div class="col-md-9" style="margin-left: 4%">
+        <div style="width: 100%">
+            <h2 id="well-query">Votre Recherche :
+                <span ng-bind="query"></span></h2>
+            <hr>
+            <div class="col-lg-3 col-sm-4" style="padding:5px;" ng-repeat="x in listeReponse">
+                <div class="recherche-tile" ng-click="openModal('spectacleModal.html', 'tileController','lg', x.url)">
+                    <div class="recherche-tile-image">
+                        <img src={{x.image}} style="width: inherit;" draggable="false">
+                    </div>
+                    <h3 style="margin: 5px">{{x.name}}</h3>
+                    <p style="margin: 5px">{{x.country}}</p>
+                </div>
             </div>
-            <h3 style="margin: 5px">{{x.name}}</h3>
-            <p style="margin: 5px">{{x.country}}</p>
-        </div>
-    </div>
-    </div>
-
-    <div class="pager">
-        <ul uib-pagination ng-model="page" total-items="8" items-per-page="1" direction-links="false" ng-change="pageChanged()"></ul>
-        <hr>
-    </div>
-
-</div>
-
-
-<div class="col-md-2" style="margin-top: 30px;">
-    <div class="recherche-param">
-
-        <div class="recherche-param-titre">Régions</div>
-
-        <div ng-dropdown-multiselect="" options="regionDropdownData" selected-model="regionDropdownModel" extra-settings="regionDropdownSettings"></div>
-    </div>
-
-    <div class="btn-group btn-block recherche-param">
-
-        <div class="recherche-param-titre">Période</div>
-
-        <div class="col-md-offset-1"><h4>Debut</h4></div>
-
-        <div class="col-md-12">
-            <p class="input-group">
-                <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
-                <span class="input-group-btn">
-            <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
-          </span>
-            </p>
         </div>
 
-        <div class="col-md-offset-1"><h4>Fin</h4></div>
-
-        <div class="col-md-12">
-            <p class="input-group">
-                <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
-                <span class="input-group-btn">
-            <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
-          </span>
-            </p>
+        <div class="pager">
+            <ul uib-pagination ng-model="page" total-items="8" items-per-page="1" direction-links="false" ng-change="pageChanged()"></ul>
+            <hr>
         </div>
     </div>
 
-    <div class="recherche-param">
+    <div class="col-md-2" style="margin-top: 30px;">
+        <div class="recherche-param">
 
-        <div class="recherche-param-titre">Cherchez-vous ...</div>
+            <div class="recherche-param-titre">Régions</div>
 
-        <label class="recherche-param-button recherche-param-radio" ng-click="setRechercheType('evenement')" ng-model="rechercheType" uib-btn-radio="'evenement'">un evenement</label>
-        <label class="recherche-param-button recherche-param-radio" ng-click="setRechercheType('salle')" ng-model="rechercheType" uib-btn-radio="'salle'">une salle</label>
-        <label class="recherche-param-button recherche-param-radio" ng-click="setRechercheType('artiste')" ng-model="rechercheType" uib-btn-radio="'artiste'">un artiste</label>
+            <div ng-dropdown-multiselect="" options="regionDropdownData" selected-model="regionDropdownModel" extra-settings="regionDropdownSettings"></div>
+        </div>
 
-    </div>
-</div>
-    <div class="cartFab" ng-click="gotoPage('panier')" id="fab">
-        <span class="glyphicon glyphicon-shopping-cart"></span>
+        <div class="btn-group btn-block recherche-param">
+
+            <div class="recherche-param-titre">Période</div>
+
+            <div class="col-md-offset-1"><h4>Debut</h4></div>
+
+            <div class="col-md-12">
+                <p class="input-group">
+                    <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                    <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+                </p>
+            </div>
+
+            <div class="col-md-offset-1"><h4>Fin</h4></div>
+
+            <div class="col-md-12">
+                <p class="input-group">
+                    <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                    <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+                </p>
+            </div>
+        </div>
     </div>
 </div>

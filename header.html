@@ -1,29 +1,24 @@
 <header>
     <nav class="navbar navbar-header navbar-fixed-top">
         <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand logo" href="#">
-                    <img src="img/logo.png" alt="MySpectacle" class="hidden-xs hidden-sm">
-                </a>
-            </div>
-
+            <a class="navbar-brand logo" href="#">
+                <img src="img/logo.png" alt="MySpectacle" class="hidden-xs hidden-sm">
+            </a>
             <ul class="nav navbar-nav navbar-right">
-                <li><button class="navbar-button mes-billets-but" ng-click="gotoPage('panier')"> Mes billets</button></li>
+                <li><button class="navbar-button mes-billets-but" ng-click="gotoPage('panier')"> Mon panier</button></li>
                 <li>
                     <button class="navbar-button" ng-click="openModal('connexionModal.html', 'connexionController')">
-                        <span class="glyphicon glyphicon-user"></span> Mon compte</button>
+                            <span class="glyphicon glyphicon-user"></span> Mon compte</button>
                 </li>
             </ul>
 
-
-            <div class="col-sm-4 recherche">
+            <div class="recherche">
                 <div class="input-group group_query">
                     <input id="query"
                            type="text"
                            class="form-control input-query"
                            placeholder="Chercher un spectacle"
-                           ng-keydown="rechercher($event.keyCode,1)"
-                    >
+                           ng-keydown="rechercher($event.keyCode,1)">
                     <div class="input-group-btn">
                         <button class="btn  button-query" ng-click="rechercher(13,1)">
                             <i class="glyphicon glyphicon-search"></i>
@@ -34,10 +29,37 @@
 
         </div>
     </nav>
-    <div class="col-sm-3 col-lg-2" style="padding: 0;">
-    <nav class="navbar navbar-header2 navbar-fixed-side">
-        <div class="container-fluid">
-        </div>
-    </nav>
-    </div>
 </header>
+
+<div class="leftSideNav">
+    <div class="leftSideNavGroup">
+        <button ng-click="gotoPage('')">Accueil</button>
+    </div>
+    <div class="leftSideNavSeparator"></div>
+    <div class="leftSideNavGroup">
+        <button ng-click="gotoPage('')">Concerts</button>
+        <div class="leftSideNavSeparatorMin"></div>
+        <button ng-click="gotoPage('')">Théâtre & Humour</button>
+        <div class="leftSideNavSeparatorMin"></div>
+        <button ng-click="gotoPage('')">Sports</button>
+        <div class="leftSideNavSeparatorMin"></div>
+        <button ng-click="gotoPage('')">Spectacle, cabarets, cirques</button>
+        <div class="leftSideNavSeparatorMin"></div>
+        <button ng-click="gotoPage('')">Musées, expos, monuments</button>
+        <div class="leftSideNavSeparatorMin"></div>
+        <button ng-click="gotoPage('')">Parcs, salons, ciné</button>
+        <div class="leftSideNavSeparatorMin"></div>
+        <button ng-click="gotoPage('')">Festivals</button>
+        <div class="leftSideNavSeparatorMin"></div>
+        <button ng-click="gotoPage('')">Classique, opéra, danse</button>
+        <div class="leftSideNavSeparatorMin"></div>
+        <button ng-click="gotoPage('')">Spectacles pour enfants</button>
+        <div class="leftSideNavSeparatorMin"></div>
+        <button ng-click="gotoPage('')">Activités de Loisirs</button>
+    </div>
+    <div class="leftSideNavSeparator"></div>
+    <div class="leftSideNavGroup">
+        <button ng-click="gotoPage('')"><span><i class="fa fa-map-marker" aria-hidden="true"></i></span>  Près de chez moi</button>
+    </div>
+</div>
+

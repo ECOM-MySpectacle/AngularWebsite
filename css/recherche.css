@@ -11,11 +11,7 @@
 .navbar-header {
     background-color: var(--head-color);
     height: 65px;
-}
-
-.navbar-header2 {
-    background-color: #f3f3f3;
-    height: 100%;
+    box-shadow: 0 0 10px #a4a4a4;
 }
 
 .logo {
@@ -48,7 +44,10 @@
 }
 
 .recherche {
+    transition: 0.15s ease;
+    display: inline-block;
     padding-top: 10px;
+    width: 30%;
 }
 
 .input-query {
@@ -63,6 +62,10 @@
     width: 45px;
     background-color: var(--button-color);
     color: white;
+}
+
+.button-query:focus{
+    color:white;
 }
 
 .button-query:hover{
@@ -296,4 +299,47 @@ body {
 }
 .tileModaladdToCart:hover {
     background-color: var(--button-color-hover);
+}
+
+.leftSideNav {
+    position: fixed;
+    height: 100vh;
+    width: 280px;
+    box-shadow: 0 0 10px #a4a4a4;
+    background-color: #eeeeee;
+}
+
+.leftSideNavGroup {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+.leftSideNavGroup > button {
+    transition: 0.2s ease;
+    border-width: 0;
+    background-color: transparent;
+    width: 100%;
+    font-size: 20px;
+    outline:0;
+    text-align: left;
+    padding: 5px 0 5px 10px;
+}
+
+.leftSideNavGroup > button:hover,
+.leftSideNavGroup > button:focus{
+    background-color: #d2d2d2;
+    border-left: 5px solid var(--button-color);
+}
+.leftSideNavGroup > button:active{
+    background-color: #bfbfbf;
+}
+.leftSideNavSeparator {
+    height: 1px;
+    margin-right: 10%;
+    margin-left: 10%;
+    background-color: var(--button-color);
+}
+.leftSideNavSeparatorMin {
+    height: 1px;
+    margin-right: 100%;
+    background-color: #dedede;
 }
