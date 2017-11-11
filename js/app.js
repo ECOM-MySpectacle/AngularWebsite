@@ -242,6 +242,7 @@ app.controller('recherche', function($scope,$location) {
 });
 
 app.controller('mainController', ['$scope', '$http', 'ngCart', 'modalService', '$location', function($scope,$uibModal,$uibModalStack,modalService,$location) {
+
     $scope.query = "";
     $scope.rechercheType = "evenement";
 
@@ -268,8 +269,16 @@ app.controller('mainController', ['$scope', '$http', 'ngCart', 'modalService', '
 }]);
 
 
-app.controller('panier', function ($scope, Restangular) {
+app.controller('panier', function ($scope, ngCart) {
+    $scope.cart=ngCart;
 
+    $scope.plusUn = function(item) {
+        ngCart.addItem(item.getId(), item.getName(), item.getPrice(), 1);
+    };
+
+    $scope.moinsUn = function(item) {
+        ngCart.addItem(item.getId(), item.getName(), item.getPrice(), -1);
+    };
 });
 
 

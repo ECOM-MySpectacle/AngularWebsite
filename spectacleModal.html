@@ -1,29 +1,28 @@
 <div class="modal-body" id="modal-toast">
+    <button class="boutonFermer" ng-click="cancelModal()">x</button>
+
     <div class="container" style="margin: 20px; width: auto">
         <div class="row">
-            <div class="col-md-4">
-                <div class="tileModalLeft">
-                    <img src="test/spectacle1.jpg">
+            <div class="col-md-4 tileModalLeft">
+                <img src="test/spectacle1.jpg">
 
-                    <div class="tileModalPrice">
-                        <h6>price</h6>
-                        <h1>7.99€</h1>
-                    </div>
-
-                    <div class="tileModalQuantity">
-                        <h6>quantity</h6>
-                        <div>
-                            <i class="fa fa-minus fa-lg tileModalQuantityButton" aria-hidden="true" ng-click="moinsUn()"></i>
-                            <input class="tileModalInput" type="number" id="quantity" value="1" min="1" ng-model="quantite">
-                            <i class="fa fa-plus fa-lg tileModalQuantityButton" aria-hidden="true" ng-click="plusUn()"></i>
-                        </div>
-                    </div>
-
-                    <button class="btn-block tileModaladdToCart" ng-click="addItToCart()">
-                        Ajouter au panier
-                    </button>
-
+                <div style="width: 100%;color: grey;margin-top: 20px;font-size: 15px;">
+                    <span>prix</span>
+                    <span style="float: right">quantité</span>
                 </div>
+
+                <div>
+                    <span style="font-size: 36px; font-weight: 500">7.99€</span>
+                    <div style="float:right; margin-top: 12px;user-select: none;">
+                        <i class="fa fa-minus fa-lg tileModalQuantityButton" aria-hidden="true" ng-click="moinsUn()"></i>
+                        <input class="tileModalInput" type="number" id="quantity" value="1" min="1" ng-model="quantite">
+                        <i class="fa fa-plus fa-lg tileModalQuantityButton" aria-hidden="true" ng-click="plusUn()"></i>
+                    </div>
+                </div>
+
+                <button class="btn-block tileModaladdToCart" ng-click="addItToCart()">
+                    Ajouter au panier
+                </button>
             </div>
 
             <div class="col-md-8">
