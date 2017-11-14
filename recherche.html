@@ -1,33 +1,55 @@
-<div ng-controller="recherche" style="margin-left: 280px">
+<div ng-controller="recherche" >
 
-    <div class="col-md-9" style="margin-left: 4%">
-        <div style="width: 100%">
-            <h2 id="well-query">Votre Recherche :
-                <span ng-bind="query"></span></h2>
-            <hr>
-            <div class="col-lg-3 col-sm-4" style="padding:5px;" ng-repeat="x in listeReponse">
-                <div class="recherche-tile" ng-click="openModal('spectacleModal.html', 'tileController','lg', x.url)">
-                    <div class="recherche-tile-image">
-                        <img src={{x.image}} style="width: inherit;" draggable="false">
+    <header>
+        <nav class="navbar navbar-header navbar-fixed-top">
+            <div class="container-fluid">
+                <a class="navbar-brand logo" href="#">
+                    <img src="img/logo.png" alt="MySpectacle" class="hidden-xs hidden-sm">
+                </a>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><button class="navbar-button mes-billets-but" ng-click="gotoPage('panier')"> Mon panier</button></li>
+                    <li>
+                        <button class="navbar-button" ng-click="openModal('connexionModal.html', 'connexionController')">
+                            <span class="glyphicon glyphicon-user"></span> Mon compte</button>
+                    </li>
+                </ul>
+
+                <div class="recherche">
+                    <div class="input-group group_query">
+                        <input id="query"
+                               type="text"
+                               class="form-control input-query"
+                               placeholder="Chercher un spectacle"
+                               ng-keydown="rechercher($event.keyCode,1)">
+                        <div class="input-group-btn">
+                            <button class="btn  button-query" ng-click="rechercher(13,1)">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </div>
                     </div>
-                    <h3 style="margin: 5px">{{x.name}}</h3>
-                    <p style="margin: 5px">{{x.country}}</p>
                 </div>
+
             </div>
+        </nav>
+    </header>
+
+    <div class="leftSideNav">
+        <div class="leftSideNavGroup">
+            <button ng-click="gotoPage('')">Accueil</button>
+        </div>
+        <div class="leftSideNavSeparator"></div>
+        <div class="leftSideNavGroup">
+            <button ng-click="gotoPage('')"><span><i class="fa fa-map-marker" aria-hidden="true"></i></span>  Près de chez moi</button>
         </div>
 
-        <div class="pager">
-            <ul uib-pagination ng-model="page" total-items="8" items-per-page="1" direction-links="false" ng-change="pageChanged()"></ul>
-            <hr>
-        </div>
-    </div>
-
-    <div class="col-md-2" style="margin-top: 30px;">
         <div class="recherche-param">
 
             <div class="recherche-param-titre">Régions</div>
-
             <div ng-dropdown-multiselect="" options="regionDropdownData" selected-model="regionDropdownModel" extra-settings="regionDropdownSettings"></div>
+
+            <div class="recherche-param-titre">Type de spectacle</div>
+            <div ng-dropdown-multiselect="" options="spectacleDropdownData" selected-model="spectacleDropdownModel" extra-settings="spectacleDropdownSettings"></div>
+
         </div>
 
         <div class="btn-group btn-block recherche-param">
@@ -40,8 +62,8 @@
                 <p class="input-group">
                     <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
                     <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
-              </span>
+                    <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                  </span>
                 </p>
             </div>
 
@@ -51,9 +73,34 @@
                 <p class="input-group">
                     <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
                     <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
-              </span>
+                    <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                  </span>
                 </p>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-left: 280px">
+
+        <div class="col-md-9" style="margin-left: 4%">
+            <div style="width: 100%">
+                <h2 id="well-query">Votre Recherche :
+                    <span ng-bind="query"></span></h2>
+                <hr>
+                <div class="col-lg-3 col-sm-4" style="padding:5px;" ng-repeat="x in listeReponse">
+                    <div class="recherche-tile" ng-click="openModal('spectacleModal.html', 'tileController','lg', x.url)">
+                        <div class="recherche-tile-image">
+                            <img src={{x.image}} style="width: inherit;" draggable="false">
+                        </div>
+                        <h3 style="margin: 5px">{{x.name}}</h3>
+                        <p style="margin: 5px">{{x.country}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pager">
+                <ul uib-pagination ng-model="page" total-items="8" items-per-page="1" direction-links="false" ng-change="pageChanged()"></ul>
+                <hr>
             </div>
         </div>
     </div>

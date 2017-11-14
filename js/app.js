@@ -106,7 +106,6 @@ app.controller("tileController", function($scope,$uibModalInstance,spectacleUrl,
     };
 });
 
-
 app.controller('recherche', function($scope,$location) {
     $scope.query = $location.search().search;
     $scope.page = $location.search().page;
@@ -159,6 +158,28 @@ app.controller('recherche', function($scope,$location) {
         {id: 13, label: "Provence-Alpes-Côte d\'Azur"}
     ];
     $scope.regionDropdownSettings = {
+        showCheckAll: false,
+        showUncheckAll: false,
+        smartButtonMaxItems: 3,
+        smartButtonTextConverter: function(itemText) {
+            return itemText;
+        }
+    };
+
+    $scope.spectacleDropdownModel = [];
+    $scope.spectacleDropdownData = [
+        {id: 1, label: "Concerts"},
+        {id: 2, label: "Théâtre & Humour"},
+        {id: 3, label: "Sports"},
+        {id: 4, label: "Spectacle, cabarets, cirques"},
+        {id: 5, label: "Musées, expos, monuments"},
+        {id: 6, label: "Parcs, salons, ciné"},
+        {id: 7, label: "Festivals"},
+        {id: 8, label: "Classique, opéra, danse"},
+        {id: 9, label: "Spectacles pour enfants"},
+        {id: 10, label: "Activités de Loisirs"}
+    ];
+    $scope.spectacleDropdownSettings = {
         showCheckAll: false,
         showUncheckAll: false,
         smartButtonMaxItems: 3,
