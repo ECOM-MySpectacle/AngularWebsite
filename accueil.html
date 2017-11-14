@@ -1,30 +1,32 @@
-<div class="col-md-8 col-md-offset-2 core">
-    <h1>A la une</h1>
+<div style="padding-left: 280px">
+    <div class="col-md-8">
+        <h1>A la une</h1>
 
-    <div ng-controller="CarouselDemoCtrl">
-         <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
-             <div uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
-                 <img ng-src="{{slide.image}}" style="width:100%; position:absolute; margin-left: -50%;">
-                 <img ng-src="{{slide.masque}}" style="width:100%; position:absolute; margin-left: -50%;">
-                 <div class="carousel-text">
-                     <div ng-include="slide.info"></div>
+        <div ng-controller="CarouselDemoCtrl">
+             <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+                 <div uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
+                     <img ng-src="{{slide.image}}" style="width:100%; position:absolute; margin-left: -50%;">
+                     <img ng-src="{{slide.masque}}" style="width:100%; position:absolute; margin-left: -50%;">
+                     <div class="carousel-text">
+                         <div ng-include="slide.info"></div>
+                     </div>
                  </div>
              </div>
-         </div>
-    </div>
-    <hr>
+        </div>
+        <hr>
 
-    <h1>Ajouts récents</h1>
-    <div ng-controller="CarouselDemoCtrl">
-        <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
-            <div uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
-                <img ng-src="{{slide.image}}" style="width:100%; position:absolute; margin-left: -50%;">
-                <img ng-src="{{slide.masque}}" style="width:100%; position:absolute; margin-left: -50%;">
-                <div class="carousel-text">
-                    <div ng-include="slide.info"></div>
+        <h1>Ajouts récents</h1>
+        <div ng-controller="CarouselDemoCtrl">
+            <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+                <div uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
+                    <img ng-src="{{slide.image}}" style="width:100%; position:absolute; margin-left: -50%;">
+                    <img ng-src="{{slide.masque}}" style="width:100%; position:absolute; margin-left: -50%;">
+                    <div class="carousel-text">
+                        <div ng-include="slide.info"></div>
+                    </div>
                 </div>
             </div>
         </div>
+        <hr>
     </div>
-    <hr>
 </div>

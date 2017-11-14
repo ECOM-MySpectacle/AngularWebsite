@@ -1,5 +1,5 @@
 <div ng-controller="panier" style="margin-left: 280px">
-    <div class="col-md-7" style="width:1000px;margin-left: 4%">
+    <div style="float: left;width:66%;margin-left: 4%">
         <h2>Votre Panier</h2>
         <hr>
 
@@ -10,15 +10,17 @@
 
         <div ng-show="cart.getTotalItems() > 0">
             <div ng-repeat="item in cart.getCart().items track by $index">
-                <div style="height:200px;width: 100%;margin-bottom: 20px;background-color: #f0f0f0;">
+                <div class="panierTile">
 
                     <button class="boutonFermer" style="padding-right: 10px" ng-click="cart.removeItemById(item.getId())">x</button>
 
-                    <div style="height: 100%; width: 20px;background-color: var(--button-color);float: left"></div>
-                    <img style="height: 100%;float: left" src="test/spectacle1.jpg">
-
-                    <div style="float: left;padding-left: 20px">
-                        <h2>{{item.getName()}}</h2>
+                    <div style="height: 100%; width: 3%;background-color: var(--button-color);float: left;"></div>
+                    <div style="height: 100%;width: 28%; float: left;overflow: hidden">
+                        <img style="height: 100%;" src="test/spectacle1.jpg">
+                    </div>
+                    <div style="float: left; width: 65%; padding-left: 2%; padding-right: 2%; margin-top: 10px">
+                        <h2 style="overflow: hidden;margin-top: 0">{{item.getName()}}</h2>
+                        <hr style="background-color: darkgrey; height: 1px;">
 
                         <div style="width: 100%;color: grey;margin-top: 20px;font-size: 15px;">
                             <span>prix</span>
@@ -26,7 +28,7 @@
                         </div>
 
                         <div>
-                            <span style="font-size: 36px; font-weight: 500">{{item.getPrice()}}€</span>
+                            <span style="font-size: 32px; font-weight: 500">{{item.getPrice()}}€</span>
                             <div style="float:right; margin-top: 12px;user-select: none;">
                                 <i class="fa fa-minus fa-lg tileModalQuantityButton" aria-hidden="true" ng-click="moinsUn(item)"></i>
                                 <span style="padding-right: 10px;padding-left: 10px">{{ item.getQuantity() | number }}</span>
@@ -37,9 +39,33 @@
                 </div>
             </div>
 
-
         </div>
     </div>
 
-</div>
+    <div style="float: right; width: 24%;background-color: #f0f0f0;margin-right: 4%;margin-top: 94px">
+        <h2 class="recherche-param-titre" style="margin-top: 0; margin-bottom: 0">Résumé</h2>
 
+
+        <div style="float:left">
+            <h5 style="float:left;margin-left: 5px">Taxes: ({{cart.getTaxRate()+"%"}})</h5>
+            <h3 style="margin-left: 5px">Total:</h3>
+        </div>
+        <div style="float:right">
+            <h5 style="float:right;margin-right: 5px">{{cart.getTax() | currency}}</h5>
+            <h3 style="margin-right: 5px">{{cart.totalCost() | currency}}</h3>
+        </div>
+        <div style="margin-top: 50px;margin-bottom:10px;padding-left: 10%; padding-right: 10%">
+            <hr style="height: 1px;width: 100%; background-color: darkgrey;">
+
+            <button class="btn-block tileModaladdToCart">
+                Réserver
+            </button>
+            <button class="btn-block tileModaladdToCart">
+                € Payer maintenant
+            </button>
+        </div>
+
+
+    </div>
+
+</div>

@@ -242,7 +242,6 @@ app.controller('recherche', function($scope,$location) {
 });
 
 app.controller('mainController', ['$scope', '$http', 'ngCart', 'modalService', '$location', function($scope,$uibModal,$uibModalStack,modalService,$location) {
-
     $scope.query = "";
     $scope.rechercheType = "evenement";
 
@@ -270,6 +269,7 @@ app.controller('mainController', ['$scope', '$http', 'ngCart', 'modalService', '
 
 
 app.controller('panier', function ($scope, ngCart) {
+    ngCart.setTaxRate(10);
     $scope.cart=ngCart;
 
     $scope.plusUn = function(item) {
