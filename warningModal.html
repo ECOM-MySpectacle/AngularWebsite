@@ -1,0 +1,21 @@
+
+<div class="modal-body" id="modal-body">
+    <!--<button class="boutonFermer" style="padding-right: 10px" ng-click="cancelModal()">x</button>-->
+
+    <button class="boutonFermer" ng-click="cancelModal()">x</button>
+
+    <p ng-click=" spectacleUrl()" > test </p>
+
+    <div class="alert alert-warning">
+        <strong>Attention</strong> Vous allez supprimer tous vos billets pour un spectacle
+    </div>
+    <button class="btn-block tileModaladdToCart" ng-click="removeItemById(spectacleUrl())">
+        Supprimer les billets
+    </button>
+    <button class="btn-block tileModaladdToCart" ng-click="cancelModal()">
+        Annuler
+    </button>
+</div>
+
+    <!--    item in cart.getCart().items track by $index
+    "cart.removeItemById(item.getId())"-->

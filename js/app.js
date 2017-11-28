@@ -106,6 +106,17 @@ app.controller("tileController", function($scope,$uibModalInstance,spectacleUrl,
     };
 });
 
+app.controller("warningController",function($scope,$uibModalInstance,ngCart){
+
+    $scope.removeItemById= function(id){
+        ngCart.removeItemById(id);
+    };
+    $scope.cancelModal = function(){
+        $uibModalInstance.dismiss('close');
+    };
+});
+
+
 app.controller('recherche', function($scope,$location) {
     $scope.query = $location.search().search;
     $scope.page = $location.search().page;
@@ -289,7 +300,7 @@ app.controller('mainController', ['$scope', '$http', 'ngCart', 'modalService', '
 }]);
 
 
-app.controller('panier', function ($scope, ngCart) {
+app.controller('panier', function ($scope, ngCart, modalService) {
     ngCart.setTaxRate(10);
     $scope.cart=ngCart;
 
@@ -300,6 +311,10 @@ app.controller('panier', function ($scope, ngCart) {
     $scope.moinsUn = function(item) {
         ngCart.addItem(item.getId(), item.getName(), item.getPrice(), -1);
     };
+    $scope.warningBillet = function (item) {
+        modalService.openModal('warningModal.html','warningController','lg', item.getId() );
+
+    }
 });
 
 
