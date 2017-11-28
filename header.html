@@ -36,30 +36,72 @@
         <button ng-click="gotoPage('')">Accueil</button>
     </div>
     <div class="leftSideNavSeparator"></div>
-    <div class="leftSideNavGroup">
-        <button ng-click="gotoPage('')">Concerts</button>
-        <div class="leftSideNavSeparatorMin"></div>
-        <button ng-click="gotoPage('')">Théâtre & Humour</button>
-        <div class="leftSideNavSeparatorMin"></div>
-        <button ng-click="gotoPage('')">Sports</button>
-        <div class="leftSideNavSeparatorMin"></div>
-        <button ng-click="gotoPage('')">Spectacle, cabarets, cirques</button>
-        <div class="leftSideNavSeparatorMin"></div>
-        <button ng-click="gotoPage('')">Musées, expos, monuments</button>
-        <div class="leftSideNavSeparatorMin"></div>
-        <button ng-click="gotoPage('')">Parcs, salons, ciné</button>
-        <div class="leftSideNavSeparatorMin"></div>
-        <button ng-click="gotoPage('')">Festivals</button>
-        <div class="leftSideNavSeparatorMin"></div>
-        <button ng-click="gotoPage('')">Classique, opéra, danse</button>
-        <div class="leftSideNavSeparatorMin"></div>
-        <button ng-click="gotoPage('')">Spectacles pour enfants</button>
-        <div class="leftSideNavSeparatorMin"></div>
-        <button ng-click="gotoPage('')">Activités de Loisirs</button>
+    <div ng-show="!isSearching" class="leftSideNavButtons">
+        <div class="leftSideNavGroup">
+            <button ng-click="gotoPage('')">Concerts</button>
+            <div class="leftSideNavSeparatorMin"></div>
+            <button ng-click="gotoPage('')">Théâtre & Humour</button>
+            <div class="leftSideNavSeparatorMin"></div>
+            <button ng-click="gotoPage('')">Sports</button>
+            <div class="leftSideNavSeparatorMin"></div>
+            <button ng-click="gotoPage('')">Spectacle, cabarets, cirques</button>
+            <div class="leftSideNavSeparatorMin"></div>
+            <button ng-click="gotoPage('')">Musées, expos, monuments</button>
+            <div class="leftSideNavSeparatorMin"></div>
+            <button ng-click="gotoPage('')">Parcs, salons, ciné</button>
+            <div class="leftSideNavSeparatorMin"></div>
+            <button ng-click="gotoPage('')">Festivals</button>
+            <div class="leftSideNavSeparatorMin"></div>
+            <button ng-click="gotoPage('')">Classique, opéra, danse</button>
+            <div class="leftSideNavSeparatorMin"></div>
+            <button ng-click="gotoPage('')">Spectacles pour enfants</button>
+            <div class="leftSideNavSeparatorMin"></div>
+            <button ng-click="gotoPage('')">Activités de Loisirs</button>
+        </div>
+        <div class="leftSideNavSeparator"></div>
+        <div class="leftSideNavGroup">
+            <button ng-click="gotoPage('')"><span><i class="fa fa-map-marker" aria-hidden="true"></i></span>  Près de chez moi</button>
+        </div>
     </div>
-    <div class="leftSideNavSeparator"></div>
-    <div class="leftSideNavGroup">
-        <button ng-click="gotoPage('')"><span><i class="fa fa-map-marker" aria-hidden="true"></i></span>  Près de chez moi</button>
+
+
+    <!--Si on se trouve sur la page de recherche, on change le sideNav-->
+    <div ng-show="isSearching" class="leftSideNavButtons2">
+        <div class="col-md-12" style="margin-top: 30px;">
+            <div class="recherche-param">
+
+                <div class="recherche-param-titre">Régions</div>
+
+                <div ng-dropdown-multiselect="" options="regionDropdownData" selected-model="regionDropdownModel" extra-settings="regionDropdownSettings"></div>
+            </div>
+
+            <div class="btn-group btn-block recherche-param">
+
+                <div class="recherche-param-titre">Période</div>
+
+                <div class="col-md-offset-1"><h4>Debut</h4></div>
+
+                <div class="col-md-12">
+                    <p class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                        <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+                    </p>
+                </div>
+
+                <div class="col-md-offset-1"><h4>Fin</h4></div>
+
+                <div class="col-md-12">
+                    <p class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                        <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

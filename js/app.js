@@ -111,6 +111,8 @@ app.controller('recherche', function($scope,$location) {
     $scope.query = $location.search().search;
     $scope.page = $location.search().page;
 
+    $scope.setSearching(true);
+
     $scope.pageChanged = function() {
         $scope.rechercher(13,$scope.page);
     };
@@ -142,30 +144,7 @@ app.controller('recherche', function($scope,$location) {
         {name:'Le tumulte d\'un apothicaire',country:'Sweden', image:'test/spectacle3.jpg', url:'test/spectacle3info.html'},
         {name:'Le Cuiseur de Riz',country:'Denmark', image:'test/spectacle1.jpg', url:'test/spectacle1info.html'}];
 
-    $scope.regionDropdownModel = [];
-    $scope.regionDropdownData = [
-        {id: 1, label: "Auvergne-Rhône-Alpes"},
-        {id: 2, label: "Bourgogne-Franche-Comté"},
-        {id: 3, label: "Bretagne"},
-        {id: 4, label: "Centre-Val de Loire"},
-        {id: 5, label: "Corse"},
-        {id: 6, label: "Grand Est"},
-        {id: 7, label: "Hauts-de-France"},
-        {id: 8, label: "Île-de-France"},
-        {id: 9, label: "Normandie"},
-        {id: 10, label: "Nouvelle-Aquitaine"},
-        {id: 11, label: "Occitanie"},
-        {id: 12, label: "Pays de la Loire"},
-        {id: 13, label: "Provence-Alpes-Côte d\'Azur"}
-    ];
-    $scope.regionDropdownSettings = {
-        showCheckAll: false,
-        showUncheckAll: false,
-        smartButtonMaxItems: 3,
-        smartButtonTextConverter: function(itemText) {
-            return itemText;
-        }
-    };
+
 
     /*
         Gestion du date picker
@@ -239,14 +218,47 @@ app.controller('recherche', function($scope,$location) {
         }
         return '';
     }
+    $scope.$on('$destroy', function() {
+        $scope.setSearching(false);
+    })
 });
 
 app.controller('mainController', ['$scope', '$http', 'ngCart', 'modalService', '$location', function($scope,$uibModal,$uibModalStack,modalService,$location) {
     $scope.query = "";
-    $scope.rechercheType = "evenement";
+    $scope.rechercheType = "";
+    $scope.isSearching = false;
+
+    $scope.regionDropdownModel = [];
+    $scope.regionDropdownData = [
+        {id: 1, label: "Auvergne-Rhône-Alpes"},
+        {id: 2, label: "Bourgogne-Franche-Comté"},
+        {id: 3, label: "Bretagne"},
+        {id: 4, label: "Centre-Val de Loire"},
+        {id: 5, label: "Corse"},
+        {id: 6, label: "Grand Est"},
+        {id: 7, label: "Hauts-de-France"},
+        {id: 8, label: "Île-de-France"},
+        {id: 9, label: "Normandie"},
+        {id: 10, label: "Nouvelle-Aquitaine"},
+        {id: 11, label: "Occitanie"},
+        {id: 12, label: "Pays de la Loire"},
+        {id: 13, label: "Provence-Alpes-Côte d\'Azur"}
+    ];
+    $scope.regionDropdownSettings = {
+        showCheckAll: false,
+        showUncheckAll: false,
+        smartButtonMaxItems: 3,
+        smartButtonTextConverter: function(itemText) {
+            return itemText;
+        }
+    };
 
     $scope.setRechercheType = function(type) {
         $scope.rechercheType=type;
+    };
+
+    $scope.setSearching = function(b) {
+        $scope.isSearching = Boolean(b);
     };
 
     $scope.openModal = function(url, controller, size, spectacleUrl) {
@@ -264,7 +276,8 @@ app.controller('mainController', ['$scope', '$http', 'ngCart', 'modalService', '
 
     $scope.gotoPage = function(page) {
         $location.url(page);
-    }
+    };
+    console.log($scope.isSearching);
 }]);
 
 
