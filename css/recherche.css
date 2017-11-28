@@ -27,7 +27,7 @@
     background-color: transparent;
     border-color: transparent;
     font-size: 19px;
-    color: white;
+    color: white !important;
     transition: 0.15s ease;
 }
 .navbar-button:hover {
@@ -40,7 +40,17 @@
     background-color: var(--button-color);
 }
 .mes-billets-but:hover {
-    background-color: var(--button-color-hover);
+    background-color: var(--button-color-hover) !important;
+}
+.mes-billets-but:focus {
+    background-color: var(--button-color-hover) !important;
+}
+a.navbar-button {
+    text-decoration: none;
+    color: initial;
+    padding: 22px 6px !important;
+    border: 2px !important;
+
 }
 
 .recherche {

@@ -107,22 +107,20 @@ app.controller("tileController", function($scope,$uibModalInstance,spectacleUrl,
 });
 
 
-app.controller('recherche', function($scope,$location) {
-    $scope.query = $location.search().search;
-    $scope.page = $location.search().page;
-
+app.controller('recherche', function($scope, $location) {
     $scope.setSearching(true);
+    $scope.query = $location.search().search;
 
     $scope.pageChanged = function() {
-        $scope.rechercher(13,$scope.page);
+        $scope.setPage($scope.page);
     };
 
     $scope.listeReponse=[
-        {name:'Concert de Zaz',country:'Norway', image:'test/spectacle1.jpg', url:'test/spectacle1info.html'},
-        {name:'Soirée Pop-Shot',country:'Sweden', image:'test/spectacle2.jpg', url:'test/spectacle2info.html'},
+        {name:'Denis Moulisse',country:'Norway', image:'test/spectacle1.jpg', url:'test/spectacle1info.html'},
+        {name:'HRB$$$$',country:'Sweden', image:'test/spectacle2.jpg', url:'test/spectacle2info.html'},
         {name:'Partiel d\'ALM',country:'Denmark', image:'test/spectacle3.jpg', url:'test/spectacle3info.html'},
-        {name:'Concert de Zaz',country:'Norway', image:'test/spectacle1.jpg', url:'test/spectacle1info.html'},
-        {name:'Soirée Pop-Shot',country:'Sweden', image:'test/spectacle2.jpg', url:'test/spectacle2info.html'},
+        {name:'Zizule ',country:'Norway', image:'test/spectacle1.jpg', url:'test/spectacle1info.html'},
+        {name:'Rotimule',country:'Sweden', image:'test/spectacle2.jpg', url:'test/spectacle2info.html'},
         {name:'Partiel d\'ALM',country:'Denmark', image:'test/spectacle3.jpg', url:'test/spectacle3info.html'},
         {name:'Concert de Zaz',country:'Norway', image:'test/spectacle1.jpg', url:'test/spectacle1info.html'},
         {name:'Soirée Pop-Shot',country:'Sweden', image:'test/spectacle2.jpg', url:'test/spectacle2info.html'},
@@ -226,6 +224,7 @@ app.controller('recherche', function($scope,$location) {
 app.controller('mainController', ['$scope', '$http', 'ngCart', 'modalService', '$location', function($scope,$uibModal,$uibModalStack,modalService,$location) {
     $scope.query = "";
     $scope.rechercheType = "";
+    $scope.page = 1;
     $scope.isSearching = false;
 
     $scope.regionDropdownModel = [];
@@ -253,8 +252,21 @@ app.controller('mainController', ['$scope', '$http', 'ngCart', 'modalService', '
         }
     };
 
+    $scope.getUrlParams = function() {
+        $scope.query = $location.search().search;
+
+    };
+
     $scope.setRechercheType = function(type) {
         $scope.rechercheType=type;
+        $scope.page = 1;
+        $scope.query = "";
+        $scope.goSearch();
+    };
+
+    $scope.setPage = function(n) {
+        $scope.page = n;
+        $scope.goSearch();
     };
 
     $scope.setSearching = function(b) {
@@ -265,19 +277,36 @@ app.controller('mainController', ['$scope', '$http', 'ngCart', 'modalService', '
         modalService.openModal(url, controller, size, spectacleUrl);
     };
 
-    $scope.rechercher = function (e,page) {
+    $scope.rechercher = function (e) {
         if (e !== 13) return;
-
         $scope.query = document.getElementById("query").value;
-
-        //Restangular.all('students');
-        $location.url("recherche?search="+$scope.query+"&page="+page);
+        $scope.page = 1;
+        $scope.goSearch();
     };
 
+    //recharche la page de recherche
+    $scope.goSearch = function() {
+        var res = "recherche";
+        var tig = "?";
+        if ($scope.query !== "") {
+            res += (tig + "search=" + $scope.query);
+            tig = "&";
+        }
+        if ($scope.page > 0) {
+            res += (tig + "page=" + $scope.page);
+            tig = "&";
+        }
+        if ($scope.rechercheType !== "") {
+            res += (tig + "type=" + $scope.rechercheType);
+        }
+
+        $location.url(res);
+    };
+
+    //a supprimer si possible
     $scope.gotoPage = function(page) {
         $location.url(page);
     };
-    console.log($scope.isSearching);
 }]);
 
 
@@ -303,7 +332,6 @@ app.config(function($routeProvider) {
             })
             .when('/recherche', {
                 templateUrl : 'recherche.html'
-
             })
             .when('/panier', {
                 templateUrl : 'panier.html'
