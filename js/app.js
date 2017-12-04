@@ -106,11 +106,14 @@ app.controller("tileController", function($scope,$uibModalInstance,spectacleUrl,
     };
 });
 
-app.controller("warningController",function($scope,$uibModalInstance,ngCart){
+app.controller("warningController",function($scope,$uibModalInstance,ngCart, spectacleUrl){
 
-    $scope.removeItemById= function(id){
-        ngCart.removeItemById(id);
+    $scope.removeItemById= function(){
+        ngCart.removeItemById(spectacleUrl);
+        $scope.cancelModal();
+
     };
+
     $scope.cancelModal = function(){
         $uibModalInstance.dismiss('close');
     };
