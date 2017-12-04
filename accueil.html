@@ -1,32 +1,77 @@
-<div style="padding-left: 280px">
-    <div class="col-md-8">
-        <h1>A la une</h1>
-
-        <div ng-controller="CarouselDemoCtrl">
-             <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
-                 <div uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
-                     <img ng-src="{{slide.image}}" style="width:100%; position:absolute; margin-left: -50%;">
-                     <img ng-src="{{slide.masque}}" style="width:100%; position:absolute; margin-left: -50%;">
-                     <div class="carousel-text">
-                         <div ng-include="slide.info"></div>
-                     </div>
-                 </div>
-             </div>
+<div style="padding-left: 100px">
+    <div class="acceuil-main">
+        <div>
+            Bienvenue sur MySpectacle
         </div>
-        <hr>
+        <div style="font-size: 20px">
+            Un site d'achat et de réservation de place de spectacle, cinéma, loisirs...
+        </div>
+        <div class="acceuil-main-container">
+            <div style="padding-left: 15px">A la une</div>
+            <div class="col-md-4 acceuil-main-container-image">
+                <img src="test/spectacle1.jpg">
+            </div>
+            <div class="col-md-4 acceuil-main-container-image">
+                <img src="test/spectacle2.jpg">
+            </div>
+            <div class="col-md-4 acceuil-main-container-image">
+                <img src="test/spectacle3.jpg">
+            </div>
 
-        <h1>Ajouts récents</h1>
-        <div ng-controller="CarouselDemoCtrl">
-            <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
-                <div uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
-                    <img ng-src="{{slide.image}}" style="width:100%; position:absolute; margin-left: -50%;">
-                    <img ng-src="{{slide.masque}}" style="width:100%; position:absolute; margin-left: -50%;">
-                    <div class="carousel-text">
-                        <div ng-include="slide.info"></div>
-                    </div>
-                </div>
+        </div>
+    </div>
+
+    <div class="acceuil-nous">
+        <div class="acceuil-nous-titre">Qui sommes-nous?</div>
+
+        <div class="acceuil-nous-container">
+            <div class="acceuil-nous-container-image">
+                <img src="img/PPAG.jpg">
+            </div>
+            <div class="acceuil-nous-container-text">
+                <div>Anthony Geourjon</div>Chef de projet, Lead Developer
             </div>
         </div>
-        <hr>
+
+        <div class="acceuil-nous-container acceuil-nous-right">
+            <div class="acceuil-nous-container-image acceuil-nous-right">
+                <img src="img/PPOD.jpg">
+            </div>
+            <div class="acceuil-nous-container-text acceuil-nous-right">
+                <div>Oriane Dalle</div>Scrum Master, Développeur Front-End
+            </div>
+        </div>
+
+        <div class="acceuil-nous-container">
+            <div class="acceuil-nous-container-image">
+                <img src="img/PPHB.jpg">
+            </div>
+            <div class="acceuil-nous-container-text">
+                <div>Hervé Becher</div>Développeur Back-end, Sécurité
+            </div>
+        </div>
+
+        <div class="acceuil-nous-container acceuil-nous-right">
+            <div class="acceuil-nous-container-image acceuil-nous-right">
+                <img src="img/PPRS.jpg">
+            </div>
+            <div class="acceuil-nous-container-text acceuil-nous-right">
+                <div>Rémi Savary</div>Développeur classe Guerrier
+            </div>
+        </div>
+
+        <div class="acceuil-nous-container">
+            <div class="acceuil-nous-container-image">
+                <img src="img/PPDL.jpg">
+            </div>
+            <div class="acceuil-nous-container-text">
+                <div>Denis Lachartre</div>Développeur Front-End
+            </div>
+        </div>
+
+    </div>
+
+    <div class="acceuil-footer">
+        © Copyright Moulisse Prod. - 2017
     </div>
 </div>

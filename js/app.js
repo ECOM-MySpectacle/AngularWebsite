@@ -227,6 +227,8 @@ app.controller('mainController', ['$scope', '$http', 'ngCart', 'modalService', '
     $scope.page = 1;
     $scope.isSearching = false;
 
+    $scope.currentTitle = "My Spectacle";
+
     $scope.regionDropdownModel = [];
     $scope.regionDropdownData = [
         {id: 1, label: "Auvergne-Rhône-Alpes"},
@@ -307,6 +309,10 @@ app.controller('mainController', ['$scope', '$http', 'ngCart', 'modalService', '
     $scope.gotoPage = function(page) {
         $location.url(page);
     };
+
+    $scope.$on('$routeChangeSuccess', function(event, current) {
+        $scope.currentTitle = current.title;
+    });
 }]);
 
 
@@ -328,15 +334,19 @@ app.controller('panier', function ($scope, ngCart) {
 app.config(function($routeProvider) {
         $routeProvider
             .when('/', {
-                templateUrl : 'accueil.html'
+                templateUrl : 'accueil.html',
+                title: 'My Spectacle'
             })
             .when('/recherche', {
-                templateUrl : 'recherche.html'
+                templateUrl : 'recherche.html',
+                title: 'My Spectacle - Recherche'
             })
             .when('/panier', {
-                templateUrl : 'panier.html'
+                templateUrl : 'panier.html',
+                title: 'My Spectacle - Panier'
             })
             .otherwise({
-                templateUrl : '404.html'
+                templateUrl : '404.html',
+                title: 'My Spectacle - 404'
             })
     });
