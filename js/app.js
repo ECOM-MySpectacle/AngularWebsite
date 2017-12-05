@@ -98,9 +98,11 @@ app.controller("warningController",function($scope,$uibModalInstance,ngCart, spe
     };
 });
 
-app.controller('recherche', function($scope, $location) {
+app.controller('recherche', function($scope, $location, Restangular) {
     $scope.setSearching(true);
     $scope.query = $location.search().search;
+    $scope.page = $location.search().page;
+
 
     $scope.pageChanged = function() {
         $scope.setPage($scope.page);
@@ -324,24 +326,26 @@ app.controller('panier', function ($scope, ngCart, modalService) {
     }
 });
 
-
+app.config(function(RestangularProvider) {
+    RestangularProvider.setBaseUrl('https://dog.ceo/api');
+});
 
 app.config(function($routeProvider) {
-        $routeProvider
-            .when('/', {
-                templateUrl : 'accueil.html',
-                title: 'My Spectacle'
-            })
-            .when('/recherche', {
-                templateUrl : 'recherche.html',
-                title: 'My Spectacle - Recherche'
-            })
-            .when('/panier', {
-                templateUrl : 'panier.html',
-                title: 'My Spectacle - Panier'
-            })
-            .otherwise({
-                templateUrl : '404.html',
-                title: 'My Spectacle - 404'
-            })
-    });
+    $routeProvider
+        .when('/', {
+            templateUrl : 'accueil.html',
+            title: 'My Spectacle'
+        })
+        .when('/recherche', {
+            templateUrl : 'recherche.html',
+            title: 'My Spectacle - Recherche'
+        })
+        .when('/panier', {
+            templateUrl : 'panier.html',
+            title: 'My Spectacle - Panier'
+        })
+        .otherwise({
+            templateUrl : '404.html',
+            title: 'My Spectacle - 404'
+        })
+});
