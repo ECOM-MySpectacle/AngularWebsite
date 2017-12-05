@@ -82,23 +82,13 @@
                 <div class="col-md-offset-1"><h4>Debut</h4></div>
 
                 <div class="col-md-12">
-                    <p class="input-group">
-                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
-                        <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
-              </span>
-                    </p>
+                    <md-datepicker ng-model="ctrl.myDateDeb" md-placeholder="Enter date" md-min-date="ctrl.myDate" md-max-date="ctrl.myDateFin"></md-datepicker>
                 </div>
 
                 <div class="col-md-offset-1"><h4>Fin</h4></div>
 
                 <div class="col-md-12">
-                    <p class="input-group">
-                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
-                        <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
-              </span>
-                    </p>
+                    <md-datepicker ng-model="ctrl.myDateFin" md-placeholder="Enter date" md-min-date="ctrl.myDateDeb" md-max-date="ctrl.maxDate"></md-datepicker>
                 </div>
             </div>
         </div>

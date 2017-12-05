@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngMaterial','ngCart','ngAnimate','ngSanitize','ngRoute','restangular','ui.bootstrap','angularjs-dropdown-multiselect']);
+var app = angular.module('app', [ 'ngMaterial','ngCart','ngAnimate','ngSanitize','ngRoute','restangular','ui.bootstrap','angularjs-dropdown-multiselect']);
 
 app.service('modalService', function($uibModal,$uibModalStack){
     var modalService = {};
