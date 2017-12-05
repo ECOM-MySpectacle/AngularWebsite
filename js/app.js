@@ -319,7 +319,7 @@ app.controller('panier', function ($scope, ngCart, modalService) {
         ngCart.addItem(item.getId(), item.getName(), item.getPrice(), -1);
     };
     $scope.warningBillet = function (item) {
-        modalService.openModal('warningModal.html','warningController','lg', item.getId() );
+        modalService.openModal('warningModal.html','warningController','md', item.getId() );
 
     }
 });
