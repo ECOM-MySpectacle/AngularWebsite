@@ -12,7 +12,7 @@
             <div ng-repeat="item in cart.getCart().items track by $index">
                 <div class="panierTile">
 
-                    <button class="boutonFermer" style="padding-right: 10px" ng-click="cart.removeItemById(item.getId())">x</button>
+                    <button class="boutonFermer" style="padding-right: 10px" ng-click="warningBillet(item)">x</button>
 
                     <div style="height: 100%; width: 3%;background-color: var(--button-color);float: left;"></div>
                     <div style="height: 100%;width: 28%; float: left;overflow: hidden">
