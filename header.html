@@ -38,25 +38,25 @@
     <div class="leftSideNavSeparator"></div>
     <div ng-show="!isSearching" class="leftSideNavButtons">
         <div class="leftSideNavGroup">
-            <button ng-click="setRechercheType('c')">Concerts</button>
+            <button ng-click="setRechercheType('c','1')">Concerts</button>
             <div class="leftSideNavSeparatorMin"></div>
-            <button ng-click="setRechercheType('th')">Théâtre & Humour</button>
+            <button ng-click="setRechercheType('th','2')">Théâtre & Humour</button>
             <div class="leftSideNavSeparatorMin"></div>
-            <button ng-click="setRechercheType('s')">Sports</button>
+            <button ng-click="setRechercheType('s','3')">Sports</button>
             <div class="leftSideNavSeparatorMin"></div>
-            <button ng-click="setRechercheType('scc')">Spectacle, cabarets, cirques</button>
+            <button ng-click="setRechercheType('scc','4')">Spectacle, cabarets, cirques</button>
             <div class="leftSideNavSeparatorMin"></div>
-            <button ng-click="setRechercheType('mem')">Musées, expos, monuments</button>
+            <button ng-click="setRechercheType('mem','5')">Musées, expos, monuments</button>
             <div class="leftSideNavSeparatorMin"></div>
-            <button ng-click="setRechercheType('psc')">Parcs, salons, ciné</button>
+            <button ng-click="setRechercheType('psc','6')">Parcs, salons, ciné</button>
             <div class="leftSideNavSeparatorMin"></div>
-            <button ng-click="setRechercheType('f')">Festivals</button>
+            <button ng-click="setRechercheType('f','7')">Festivals</button>
             <div class="leftSideNavSeparatorMin"></div>
-            <button ng-click="setRechercheType('cod')">Classique, opéra, danse</button>
+            <button ng-click="setRechercheType('cod','8')">Classique, opéra, danse</button>
             <div class="leftSideNavSeparatorMin"></div>
-            <button ng-click="setRechercheType('spe')">Spectacles pour enfants</button>
+            <button ng-click="setRechercheType('spe','9')">Spectacles pour enfants</button>
             <div class="leftSideNavSeparatorMin"></div>
-            <button ng-click="setRechercheType('al')">Activités de Loisirs</button>
+            <button ng-click="setRechercheType('al','10')">Activités de Loisirs</button>
         </div>
         <div class="leftSideNavSeparator"></div>
         <div class="leftSideNavGroup">
@@ -68,6 +68,12 @@
     <!--Si on se trouve sur la page de recherche, on change le sideNav-->
     <div ng-show="isSearching" class="leftSideNavButtons2">
         <div class="col-md-12" style="margin-top: 30px;">
+            <div class="recherche-param">
+
+                <div class="recherche-param-titre">Type de spectacle</div>
+
+                <div ng-dropdown-multiselect="" options="typeDropdownData" selected-model="typeDropdownModel" extra-settings="regionDropdownSettings"></div>
+            </div>
             <div class="recherche-param">
 
                 <div class="recherche-param-titre">Régions</div>
