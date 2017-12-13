@@ -103,6 +103,11 @@ app.controller('recherche', function($scope, $location, Restangular) {
     $scope.query = $location.search().search;
     $scope.page = $location.search().page;
 
+    Restangular.all('spectacles').getList().then(function(result) {
+        console.log(result);
+    }, function() {
+        console.log("There was an error");
+    });
 
     $scope.pageChanged = function() {
         $scope.setPage($scope.page);
@@ -327,8 +332,24 @@ app.controller('panier', function ($scope, ngCart, modalService) {
 });
 
 app.config(function(RestangularProvider) {
-    RestangularProvider.setBaseUrl('https://dog.ceo/api');
+    RestangularProvider.setBaseUrl('http://ec2-35-177-143-19.eu-west-2.compute.amazonaws.com:8080/MyApplication/api');
 });
+
+app.config(function(RestangularProvider) {
+    // add a response intereceptor
+    RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
+        var extractedData;
+        console.log(data.message);
+
+        if (operation === "getList") {
+            extractedData = [data.message];
+        } else {
+            extractedData = data;
+        }
+        return extractedData;
+    });
+});
+
 
 app.config(function($routeProvider) {
     $routeProvider
