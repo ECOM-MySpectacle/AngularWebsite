@@ -103,11 +103,22 @@ app.controller('recherche', function($scope, $location, Restangular) {
     $scope.query = $location.search().search;
     $scope.page = $location.search().page;
 
-    Restangular.all('spectacles').getList().then(function(result) {
-        console.log(result);
-    }, function() {
-        console.log("There was an error");
-    });
+    // construit le ventre de la requete
+    var postBody = {};
+    if (typeof $scope.query === "undefined") {
+        postBody.query = '';
+    } else {
+        postBody.query = $scope.query;
+    }
+
+    console.log(postBody);
+    Restangular.all('recherche/spectacles').post(postBody);
+
+    // Restangular.all('spectacles').getList().then(function(result) {
+    //     console.log(result);
+    // }, function() {
+    //     console.log("There was an error");
+    // });
 
     $scope.pageChanged = function() {
         $scope.setPage($scope.page);
@@ -138,7 +149,8 @@ app.controller('recherche', function($scope, $location, Restangular) {
         {name:'Partiel d\'ALM',country:'Denmark', image:'test/spectacle3.jpg', url:'test/spectacle3info.html'},
         {name:'Barnave',country:'Norway', image:'test/spectacle2.jpg', url:'test/spectacle2info.html'},
         {name:'Le tumulte d\'un apothicaire',country:'Sweden', image:'test/spectacle3.jpg', url:'test/spectacle3info.html'},
-        {name:'Le Cuiseur de Riz',country:'Denmark', image:'test/spectacle1.jpg', url:'test/spectacle1info.html'}];
+        {name:'Le Cuiseur de Riz',country:'Denmark', image:'test/spectacle1.jpg', url:'test/spectacle1info.html'}
+        ];
 
 
 
@@ -339,10 +351,9 @@ app.config(function(RestangularProvider) {
     // add a response intereceptor
     RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
         var extractedData;
-        console.log(data.message);
 
         if (operation === "getList") {
-            extractedData = [data.message];
+            extractedData = data;
         } else {
             extractedData = data;
         }
