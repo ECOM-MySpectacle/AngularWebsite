@@ -38,16 +38,16 @@
     <div class="leftSideNavSeparator"></div>
     <div ng-show="!isSearching" class="leftSideNavButtons">
         <div class="leftSideNavGroup">
-            <button ng-click="setRechercheType('c')"><p>Concerts</p>   <div class="icon"><span><i class="fa fa-map-marker" aria-hidden="true"></i></span></div></button>
-            <button ng-click="setRechercheType('th')"><p>Théâtre & Humour</p>   <div class="icon"><span><i class="fa fa-smile-o" aria-hidden="true"></i></span></div></button>
-            <button ng-click="setRechercheType('s')"><p>Sports</p>   <div class="icon"><span><i class="fa fa-soccer-ball-o" aria-hidden="true"></i></span></div></button>
-            <button ng-click="setRechercheType('scc')"><p>Spectacle, cabarets, cirques</p>   <div class="icon"><span><i class="fa fa-telegram" aria-hidden="true"></i></span></div></button>
-            <button ng-click="setRechercheType('mem')"><p>Musées, expos, monuments</p>   <div class="icon"><span><i class="fa fa-bank" aria-hidden="true"></i></span></div></button>
-            <button ng-click="setRechercheType('psc')"><p>Parcs, salons, ciné</p>   <div class="icon"><span><i class="fa fa-tree" aria-hidden="true"></i></span></div></button>
-            <button ng-click="setRechercheType('f')"><p>Festivals</p>   <div class="icon"><span><i class="fa fa-glass" aria-hidden="true"></i></span></div></button>
-            <button ng-click="setRechercheType('cod')"><p>Classique, opéra, danse</p>   <div class="icon"><span><i class="fa fa-cutlery" aria-hidden="true"></i></span></div></button>
-            <button ng-click="setRechercheType('spe')"><p>Spectacles pour enfants</p>   <div class="icon"><span><i class="fa fa-leaf" aria-hidden="true"></i></span></div></button>
-            <button ng-click="setRechercheType('al')"><p>Activités de Loisirs</p>   <div class="icon"><span><i class="fa fa-snowflake-o" aria-hidden="true"></i></span></div></button>
+            <button ng-click="setRechercheType('c','1')"><p>Concerts</p>   <div class="icon"><span><i class="fa fa-map-marker" aria-hidden="true"></i></span></div></button>
+            <button ng-click="setRechercheType('th','2')"><p>Théâtre & Humour</p>   <div class="icon"><span><i class="fa fa-smile-o" aria-hidden="true"></i></span></div></button>
+            <button ng-click="setRechercheType('s','3')"><p>Sports</p>   <div class="icon"><span><i class="fa fa-soccer-ball-o" aria-hidden="true"></i></span></div></button>
+            <button ng-click="setRechercheType('scc','4')"><p>Spectacle, cabarets, cirques</p>   <div class="icon"><span><i class="fa fa-telegram" aria-hidden="true"></i></span></div></button>
+            <button ng-click="setRechercheType('mem','5')"><p>Musées, expos, monuments</p>   <div class="icon"><span><i class="fa fa-bank" aria-hidden="true"></i></span></div></button>
+            <button ng-click="setRechercheType('psc','6')"><p>Parcs, salons, ciné</p>   <div class="icon"><span><i class="fa fa-tree" aria-hidden="true"></i></span></div></button>
+            <button ng-click="setRechercheType('f','7')"><p>Festivals</p>   <div class="icon"><span><i class="fa fa-glass" aria-hidden="true"></i></span></div></button>
+            <button ng-click="setRechercheType('cod','8')"><p>Classique, opéra, danse</p>   <div class="icon"><span><i class="fa fa-cutlery" aria-hidden="true"></i></span></div></button>
+            <button ng-click="setRechercheType('spe','9')"><p>Spectacles pour enfants</p>   <div class="icon"><span><i class="fa fa-leaf" aria-hidden="true"></i></span></div></button>
+            <button ng-click="setRechercheType('al','10')"><p>Activités de Loisirs</p>   <div class="icon"><span><i class="fa fa-snowflake-o" aria-hidden="true"></i></span></div></button>
         </div>
         <div class="leftSideNavSeparator"></div>
         <div class="leftSideNavGroup">
@@ -59,12 +59,21 @@
     <!--Si on se trouve sur la page de recherche, on change le sideNav-->
     <div ng-show="isSearching" class="leftSideNavButtons2">
         <div class="col-md-12" style="margin-top: 30px;">
+
             <div class="recherche-param">
 
                 <div class="recherche-param-titre">Régions</div>
 
                 <div ng-dropdown-multiselect="" options="regionDropdownData" selected-model="regionDropdownModel" extra-settings="regionDropdownSettings"></div>
             </div>
+
+            <div class="recherche-param">
+
+                <div class="recherche-param-titre">Type de spectacle</div>
+
+                <div ng-dropdown-multiselect="" options="typeDropdownData" selected-model="typeDropdownModel" extra-settings="regionDropdownSettings"></div>
+            </div>
+
 
             <div class="btn-group btn-block recherche-param">
 
@@ -73,23 +82,13 @@
                 <div class="col-md-offset-1"><h4>Debut</h4></div>
 
                 <div class="col-md-12">
-                    <p class="input-group">
-                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
-                        <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
-              </span>
-                    </p>
+                    <md-datepicker ng-model="ctrl.myDateDeb" md-placeholder="Enter date" md-min-date="ctrl.myDate" md-max-date="ctrl.myDateFin"></md-datepicker>
                 </div>
 
                 <div class="col-md-offset-1"><h4>Fin</h4></div>
 
                 <div class="col-md-12">
-                    <p class="input-group">
-                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
-                        <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
-              </span>
-                    </p>
+                    <md-datepicker ng-model="ctrl.myDateFin" md-placeholder="Enter date" md-min-date="ctrl.myDateDeb" md-max-date="ctrl.maxDate"></md-datepicker>
                 </div>
             </div>
         </div>

@@ -239,7 +239,11 @@ app.controller('mainController', ['$scope', '$http', 'ngCart', 'modalService', '
 
     $scope.currentTitle = "My Spectacle";
 
+
+
     $scope.regionDropdownModel = [];
+    $scope.typeDropdownModel = [];
+
     $scope.regionDropdownData = [
         {id: 1, label: "Auvergne-Rhône-Alpes"},
         {id: 2, label: "Bourgogne-Franche-Comté"},
@@ -255,6 +259,20 @@ app.controller('mainController', ['$scope', '$http', 'ngCart', 'modalService', '
         {id: 12, label: "Pays de la Loire"},
         {id: 13, label: "Provence-Alpes-Côte d\'Azur"}
     ];
+
+    $scope.typeDropdownData = [
+        {id: 1, label: "Concerts"},
+        {id: 2, label: "Théâtre & Humour"},
+        {id: 3, label: "Sports"},
+        {id: 4, label: "Spectacle, cabarets, cirques"},
+        {id: 5, label: "Musées, expos, monuments"},
+        {id: 6, label: "Parcs, salons, ciné"},
+        {id: 7, label: "Festivals"},
+        {id: 8, label: "Classique, opéra, danse"},
+        {id: 9, label: "Spectacles pour enfants"},
+        {id: 10, label: "Activités de Loisirs"}
+    ];
+
     $scope.regionDropdownSettings = {
         showCheckAll: false,
         showUncheckAll: false,
@@ -269,7 +287,8 @@ app.controller('mainController', ['$scope', '$http', 'ngCart', 'modalService', '
 
     };
 
-    $scope.setRechercheType = function(type) {
+    $scope.setRechercheType = function(type, id) {
+        $scope.typeDropdownModel = [$scope.typeDropdownData[id-1]];
         $scope.rechercheType=type;
         $scope.page = 1;
         $scope.query = "";
