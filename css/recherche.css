@@ -449,3 +449,54 @@ body {
     margin-bottom: 20px;
     background-color: #f0f0f0;
 }
+
+.checkout {
+    background-color: var(--head-color-hover);
+    height: calc(100vh - 65px);
+}
+
+.checkout .title {
+    font-size: 25px;
+    text-align: center;
+    background-color: #eaeaea;
+    padding: 7px;
+}
+
+.checkout .window {
+    background-color: white;
+    width: 800px;
+    margin: 0 auto;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 0 10px #282828;
+}
+
+.checkout .form-group {
+    float: left;
+    margin: 20px;
+}
+
+.checkout p {
+    margin: 0;
+    color: gray;
+}
+.checkout .input-block-level {
+    border-radius: 4px;
+    padding: 5px;
+    font-size: 20px;
+    transition: 0.3s ease;
+    outline-color: limegreen;
+}
+
+.checkout .input-email {
+    outline-color: limegreen;
+    display: block;
+    border-radius: 4px;
+    padding: 5px;
+    font-size: 20px;
+    width: 330px;
+}
+
+.ng-invalid {
+    outline-color: red!important;
+}

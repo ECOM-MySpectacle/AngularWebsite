@@ -22,7 +22,11 @@
     <script src="lib/ui-bootstrap-tpls-2.5.0.min.js"></script>
 
     <!--API pour les paiements-->
-    <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    <script>
+        Stripe.setPublishableKey('pk_test_DzTz3rfYJSSeoQ3qWZg8LvmY');
+    </script>
+    <script type="text/javascript" src="lib/angular-payments.min.js"></script>
 
 
     <script src="js/app.js"></script>

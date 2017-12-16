@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngMaterial','ngCart','ngAnimate','ngSanitize','ngRoute','restangular','ui.bootstrap','angularjs-dropdown-multiselect']);
+var app = angular.module('app', ['ngMaterial','ngCart','ngAnimate','ngSanitize','ngRoute','restangular','ui.bootstrap','angularjs-dropdown-multiselect','angularPayments']);
 
 app.service('modalService', function($uibModal,$uibModalStack){
     var modalService = {};
@@ -240,9 +240,13 @@ app.controller('mainController', ['$scope', '$http', 'ngCart', 'modalService', '
     $scope.rechercheType = "";
     $scope.page = 1;
     $scope.isSearching = false;
+    $scope.showSideNav = true;
+
+    $scope.setShowSideNav = function(b) {
+        $scope.showSideNav = b;
+    };
 
     $scope.currentTitle = "My Spectacle";
-
 
 
     $scope.regionDropdownModel = [];
