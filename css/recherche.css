@@ -224,7 +224,8 @@ body {
     padding: 0 0 0 0;
     cursor:pointer;
     outline: none;
-    height: 242px;
+    height: 245px;
+    overflow: hidden;
 }
 
 .recherche-tile-image {
@@ -247,6 +248,7 @@ body {
 .recherche-param {
     box-shadow: 0 0 2px #656565;
     margin-bottom: 10px;
+    background-color: white;
 }
 
 .recherche-param-titre {
@@ -326,8 +328,13 @@ body {
     padding: 8px;
     font-size: 23px;
     margin-top: 10px;
+    width: 100%!important;
+    display: block!important;
+    text-align: center;
 }
 .tileModaladdToCart:hover {
+    color: white!important;
+    text-decoration: none!important;
     background-color: var(--button-color-hover);
 }
 
@@ -407,6 +414,7 @@ body {
     transition: 0.2s ease;
     position: absolute;
     margin-left: 0;
+    width: 100%;
 }
 
 

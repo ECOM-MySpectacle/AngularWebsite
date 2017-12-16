@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
 
+    <!--librairies Angular-->
     <script src="lib/angular/angular.min.js"></script>
     <script src="lib/angular-animate/angular-animate.min.js"></script>
     <script src="lib/angular-sanitize/angular-sanitize.min.js"></script>
@@ -14,17 +15,26 @@
     <script src="lib/ngCart/ngCart.js"></script>
     <script src="lib/angular-material/angular-material.js"></script>
 
+    <!--Traduction/format-->
     <script src="lib/angular/i18n/angular-locale_fr-fr.js"></script>
 
+    <!--Bootstrap-->
     <script src="lib/ui-bootstrap-tpls-2.5.0.min.js"></script>
+
+    <!--API pour les paiements-->
+    <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
+
+
     <script src="js/app.js"></script>
+    <script src="js/checkout.js"></script>
+
+    <title>{{currentTitle}}</title>
 
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/recherche.css">
-    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="lib/angular-material/angular-material.css">
 
-    <title>{{currentTitle}}</title>
 
 </head>
 <body >

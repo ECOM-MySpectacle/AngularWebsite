@@ -1,23 +1,23 @@
 <div ng-controller="recherche" style="margin-left: 280px">
 
     <div class="col-md-11" style="margin-left: 4%">
-        <div style="width: 100%">
+        <div style="width: 100%;float:left;">
             <h2 id="well-query">Votre Recherche :
                 <span ng-bind="query"></span></h2>
             <hr>
             <div class="col-lg-3 col-sm-4 " style="padding:5px;" ng-repeat="x in listeReponse">
-                <div class="recherche-tile" ng-click="openModal('spectacleModal.html', 'tileController','lg', x.url)">
+                <div class="recherche-tile" ng-click="openModal('spectacleModal.html', 'tileController','lg', x)">
                     <div class="recherche-tile-image">
-                        <img src={{x.image}} style="width: inherit;" draggable="false">
+                        <img src="img/spectacle1.jpg" style="width: inherit;" draggable="false">
                     </div>
                     <h3 style="margin: 5px">{{x.name}}</h3>
-                    <p style="margin: 5px">{{x.country}}</p>
+                    <p style="margin: 5px">{{x.theme}}</p>
                 </div>
             </div>
         </div>
 
-        <div class="pager">
-            <ul uib-pagination ng-model="page" total-items="8" items-per-page="1" direction-links="false" ng-change="pageChanged()"></ul>
+        <div class="pager" ng-show="rechercheEnded==true">
+            <ul uib-pagination ng-model="page" total-items="nbPages" items-per-page="1" direction-links="false" ng-change="pageChanged()"></ul>
             <hr>
         </div>
     </div>

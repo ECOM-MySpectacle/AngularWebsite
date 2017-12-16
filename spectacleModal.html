@@ -4,7 +4,7 @@
     <div class="container" style="margin: 20px; width: auto">
         <div class="row">
             <div class="col-md-4 tileModalLeft">
-                <img src="test/spectacle1.jpg">
+                <img src="img/spectacle1.jpg">
 
                 <div style="width: 100%;color: grey;margin-top: 20px;font-size: 15px;">
                     <span>prix</span>
@@ -26,7 +26,9 @@
             </div>
 
             <div class="col-md-8">
-                <ng-include src="selectedSpectacleUrl"> </ng-include>
+                <h2 ng-bind="selectedSpectacle.name"></h2><br>
+                <b ng-bind="selectedSpectacle.theme"></b><br>
+                <h5 ng-bind="selectedSpectacle.description"></h5>
             </div>
         </div>
     </div>

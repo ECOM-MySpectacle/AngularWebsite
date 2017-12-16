@@ -2,7 +2,7 @@ var app = angular.module('app', ['ngMaterial','ngCart','ngAnimate','ngSanitize',
 
 app.service('modalService', function($uibModal,$uibModalStack){
     var modalService = {};
-    modalService.openModal = function(url, controller, size, spectacleUrl){
+    modalService.openModal = function(url, controller, size, spectacle){
         $uibModalStack.dismissAll('another modal just opened');
         modalService.modalInstance = $uibModal.open({
             ariaLabelledBy: 'modal-title',
@@ -11,7 +11,7 @@ app.service('modalService', function($uibModal,$uibModalStack){
             controller: controller,
             controllerAs: '$ctrl',
             resolve: {
-                spectacleUrl: function() {return spectacleUrl;}
+                spectacle: function() {return spectacle;}
             },
             size: size
         });
@@ -47,8 +47,8 @@ app.controller("creationCompteController",function($scope,$uibModalInstance){
     };
 });
 
-app.controller("tileController", function($scope,$uibModalInstance,spectacleUrl,ngCart,$mdToast){
-    $scope.selectedSpectacleUrl = spectacleUrl;
+app.controller("tileController", function($scope,$uibModalInstance,spectacle,ngCart,$mdToast){
+    $scope.selectedSpectacle = spectacle;
 
     $scope.quantite = 1;
 
@@ -61,7 +61,7 @@ app.controller("tileController", function($scope,$uibModalInstance,spectacleUrl,
     };
 
     $scope.addItToCart = function() {
-        ngCart.addItem($scope.selectedSpectacleUrl, $scope.selectedSpectacleUrl, 7.99, $scope.quantite);
+        ngCart.addItem($scope.selectedSpectacle.id, $scope.selectedSpectacle.name, 7.99, $scope.quantite);
         var toast = $mdToast.simple()
             .action('ANNULER')
             .highlightAction(true)
@@ -71,7 +71,7 @@ app.controller("tileController", function($scope,$uibModalInstance,spectacleUrl,
         if ($scope.quantite>1) toast.textContent($scope.quantite+' éléments ajoutés');
         $mdToast.show(toast).then(function(response) {
             if ( response === 'ok' ) {
-                ngCart.addItem($scope.selectedSpectacleUrl, $scope.selectedSpectacleUrl, 7.99, -$scope.quantite);
+                ngCart.addItem($scope.selectedSpectacle.id, $scope.selectedSpectacle.name, 7.99, -$scope.quantite);
             }
         });
     };
@@ -85,10 +85,10 @@ app.controller("tileController", function($scope,$uibModalInstance,spectacleUrl,
 });
 
 
-app.controller("warningController",function($scope,$uibModalInstance,ngCart, spectacleUrl){
+app.controller("warningController",function($scope,$uibModalInstance,ngCart, spectacle){
 
     $scope.removeItemById= function(){
-        ngCart.removeItemById(spectacleUrl);
+        ngCart.removeItemById(spectacle);
         $scope.cancelModal();
 
     };
@@ -103,57 +103,61 @@ app.controller('recherche', function($scope, $location, Restangular) {
     $scope.query = $location.search().search;
     $scope.page = $location.search().page;
 
+    $scope.perPage = 16;
+    $scope.nbPages = $scope.page;
+
     // construit le ventre de la requete
     var postBody = {};
-    if (typeof $scope.query === "undefined") {
-        postBody.query = '';
+    if (typeof $scope.page === "undefined") {
+        postBody.page = 1;
     } else {
-        postBody.query = $scope.query;
+        postBody.page = parseInt($scope.page);
+    }
+    if (typeof $scope.perPage === "undefined") {
+        postBody.per_page = 1;
+    } else {
+        postBody.per_page = $scope.perPage;
+    }
+    var filter = {};
+    if (typeof $scope.query !== "undefined") {
+        filter.name = $scope.query;
+    }
+    if ($scope.getType().length > 0) {
+        filter.genre = [];
+        for (var i = 0; i < $scope.getType().length; i++) {
+            filter.genre.push($scope.getType()[i].label);
+        }
     }
 
-    console.log(postBody);
-    Restangular.all('recherche/spectacles').post(postBody);
+    postBody.filters = filter;
 
-    // Restangular.all('spectacles').getList().then(function(result) {
-    //     console.log(result);
-    // }, function() {
-    //     console.log("There was an error");
-    // });
+    $scope.listeReponse = [];
+
+    $scope.rechercheEnded = false;
+    Restangular.all('recherche/spectacles').post(postBody).then(function(result) {
+        if (typeof result.error !== "undefined") {
+            console.log('Error: '+result.error);
+            return;
+        }
+        $scope.nbPages = result.pages;
+        for (var i=0; i<result.entities.length; i++) {
+            var item = {};
+            if (typeof result.entities[i].nom !== "undefined") item.name = result.entities[i].nom;
+            if (typeof result.entities[i].id !== "undefined") item.id = result.entities[i].id;
+            if (typeof result.entities[i].description !== "undefined") item.description = result.entities[i].description;
+            if (typeof result.entities[i].genre !== "undefined") item.genre = result.entities[i].genre;
+            if (typeof result.entities[i].theme !== "undefined") item.theme = result.entities[i].theme;
+
+            $scope.listeReponse.push(item);
+        }
+        $scope.rechercheEnded = true;
+    }, function() {
+        console.log("There was an error in the POST request:"+postBody);
+    });
 
     $scope.pageChanged = function() {
         $scope.setPage($scope.page);
     };
-
-    $scope.listeReponse=[
-        {name:'Denis Moulisse',country:'Norway', image:'test/spectacle1.jpg', url:'test/spectacle1info.html'},
-        {name:'HRB$$$$',country:'Sweden', image:'test/spectacle2.jpg', url:'test/spectacle2info.html'},
-        {name:'Partiel d\'ALM',country:'Denmark', image:'test/spectacle3.jpg', url:'test/spectacle3info.html'},
-        {name:'Zizule ',country:'Norway', image:'test/spectacle1.jpg', url:'test/spectacle1info.html'},
-        {name:'Rotimule',country:'Sweden', image:'test/spectacle2.jpg', url:'test/spectacle2info.html'},
-        {name:'Partiel d\'ALM',country:'Denmark', image:'test/spectacle3.jpg', url:'test/spectacle3info.html'},
-        {name:'Concert de Zaz',country:'Norway', image:'test/spectacle1.jpg', url:'test/spectacle1info.html'},
-        {name:'Soirée Pop-Shot',country:'Sweden', image:'test/spectacle2.jpg', url:'test/spectacle2info.html'},
-        {name:'Partiel d\'ALM',country:'Denmark', image:'test/spectacle3.jpg', url:'test/spectacle3info.html'},
-        {name:'Concert de Zaz',country:'Norway', image:'test/spectacle1.jpg', url:'test/spectacle1info.html'},
-        {name:'Soirée Pop-Shot',country:'Sweden', image:'test/spectacle2.jpg', url:'test/spectacle2info.html'},
-        {name:'Partiel d\'ALM',country:'Denmark', image:'test/spectacle3.jpg', url:'test/spectacle3info.html'},
-        {name:'Concert de Zaz',country:'Norway', image:'test/spectacle1.jpg', url:'test/spectacle1info.html'},
-        {name:'Soirée Pop-Shot',country:'Sweden', image:'test/spectacle2.jpg', url:'test/spectacle2info.html'},
-        {name:'Partiel d\'ALM',country:'Denmark', image:'test/spectacle3.jpg', url:'test/spectacle3info.html'},
-        {name:'Concert de Zaz',country:'Norway', image:'test/spectacle1.jpg', url:'test/spectacle1info.html'},
-        {name:'Soirée Pop-Shot',country:'Sweden', image:'test/spectacle2.jpg', url:'test/spectacle2info.html'},
-        {name:'Partiel d\'ALM',country:'Denmark', image:'test/spectacle3.jpg', url:'test/spectacle3info.html'},
-
-        {name:'Concert de Zaz',country:'Norway', image:'test/spectacle1.jpg', url:'test/spectacle1info.html'},
-        {name:'Soirée Pop-Shot',country:'Sweden', image:'test/spectacle2.jpg', url:'test/spectacle2info.html'},
-        {name:'Partiel d\'ALM',country:'Denmark', image:'test/spectacle3.jpg', url:'test/spectacle3info.html'},
-        {name:'Barnave',country:'Norway', image:'test/spectacle2.jpg', url:'test/spectacle2info.html'},
-        {name:'Le tumulte d\'un apothicaire',country:'Sweden', image:'test/spectacle3.jpg', url:'test/spectacle3info.html'},
-        {name:'Le Cuiseur de Riz',country:'Denmark', image:'test/spectacle1.jpg', url:'test/spectacle1info.html'}
-        ];
-
-
-
     /*
         Gestion du date picker
      */
@@ -244,6 +248,10 @@ app.controller('mainController', ['$scope', '$http', 'ngCart', 'modalService', '
     $scope.regionDropdownModel = [];
     $scope.typeDropdownModel = [];
 
+    $scope.getType = function() {
+        return $scope.typeDropdownModel;
+    };
+
     $scope.regionDropdownData = [
         {id: 1, label: "Auvergne-Rhône-Alpes"},
         {id: 2, label: "Bourgogne-Franche-Comté"},
@@ -304,8 +312,8 @@ app.controller('mainController', ['$scope', '$http', 'ngCart', 'modalService', '
         $scope.isSearching = Boolean(b);
     };
 
-    $scope.openModal = function(url, controller, size, spectacleUrl) {
-        modalService.openModal(url, controller, size, spectacleUrl);
+    $scope.openModal = function(url, controller, size, spectacle) {
+        modalService.openModal(url, controller, size, spectacle);
     };
 
     $scope.rechercher = function (e) {
@@ -380,6 +388,16 @@ app.config(function(RestangularProvider) {
     });
 });
 
+app.config(function($mdDateLocaleProvider) {
+    $mdDateLocaleProvider.formatDate = function(date) {
+        if (typeof date === "undefined") return "Entrez une date";
+        var day = date.getDate();
+        var monthIndex = date.getMonth();
+        var year = date.getFullYear();
+
+        return day + '/' + (monthIndex + 1) + '/' + year;
+    };
+});
 
 app.config(function($routeProvider) {
     $routeProvider
@@ -394,6 +412,10 @@ app.config(function($routeProvider) {
         .when('/panier', {
             templateUrl : 'panier.html',
             title: 'My Spectacle - Panier'
+        })
+        .when('/checkout', {
+            templateUrl : 'checkout.html',
+            title: 'My Spectacle - checkout'
         })
         .otherwise({
             templateUrl : '404.html',
