@@ -100,8 +100,15 @@ app.controller("warningController",function($scope,$uibModalInstance,ngCart, spe
 
 app.controller('recherche', function($scope, $location, Restangular) {
     $scope.setSearching(true);
+
     $scope.query = $location.search().search;
     $scope.page = $location.search().page;
+
+    if (typeof $location.search().type !== "undefined")
+        $scope.setType($location.search().type.split(' '));
+
+    if (typeof $location.search().region !== "undefined")
+        $scope.setRegion($location.search().region.split(' '));
 
     $scope.perPage = 16;
     $scope.nbPages = $scope.page;
@@ -236,8 +243,11 @@ app.controller('recherche', function($scope, $location, Restangular) {
 });
 
 app.controller('mainController', ['$scope', '$http', 'ngCart', 'modalService', '$location', function($scope,$uibModal,$uibModalStack,modalService,$location) {
+    $scope.currentTitle = "My Spectacle";
+
     $scope.query = "";
-    $scope.rechercheType = "";
+    $scope.rechercheRegion = [];
+    $scope.rechercheType = [];
     $scope.page = 1;
     $scope.isSearching = false;
     $scope.showSideNav = true;
@@ -246,14 +256,50 @@ app.controller('mainController', ['$scope', '$http', 'ngCart', 'modalService', '
         $scope.showSideNav = b;
     };
 
-    $scope.currentTitle = "My Spectacle";
-
-
+    /* fonctions du DropDown Multi-select de REGIONS*/
     $scope.regionDropdownModel = [];
-    $scope.typeDropdownModel = [];
+    $scope.regionDropdownChanged = {
+        onSelectionChanged: function() {
+            $scope.rechercheRegion = [];
+            for (var i=0; i<$scope.regionDropdownModel.length; i++) {
+                $scope.rechercheRegion.push($scope.regionDropdownModel[i].id);
+            }
+            $scope.goSearch();
+        }
+    };
+    $scope.getRegion = function() {
+        return $scope.regionDropdownModel;
+    };
+    $scope.setRegion = function(a) {
+        $scope.regionDropdownModel = [];
+        $scope.rechercheRegion = [];
+        for(var i=0; i<a.length; i++) {
+            $scope.regionDropdownModel.push($scope.regionDropdownData[parseInt(a[i])-1]);
+            $scope.rechercheRegion.push(parseInt(a[i]));
+        }
+    };
 
+    /* fonctions du DropDown Multi-select de TYPES*/
+    $scope.typeDropdownModel = [];
+    $scope.typeDropdownChanged = {
+        onSelectionChanged: function() {
+            $scope.rechercheType = [];
+            for (var i=0; i<$scope.typeDropdownModel.length; i++) {
+                $scope.rechercheType.push($scope.typeDropdownModel[i].id);
+            }
+            $scope.goSearch();
+        }
+    };
     $scope.getType = function() {
         return $scope.typeDropdownModel;
+    };
+    $scope.setType = function(a) {
+        $scope.typeDropdownModel = [];
+        $scope.rechercheType = [];
+        for(var i=0; i<a.length; i++) {
+            $scope.typeDropdownModel.push($scope.typeDropdownData[parseInt(a[i])-1]);
+            $scope.rechercheType.push(parseInt(a[i]));
+        }
     };
 
     $scope.regionDropdownData = [
@@ -299,9 +345,9 @@ app.controller('mainController', ['$scope', '$http', 'ngCart', 'modalService', '
 
     };
 
-    $scope.setRechercheType = function(type, id) {
+    $scope.setRechercheType = function(id) {
         $scope.typeDropdownModel = [$scope.typeDropdownData[id-1]];
-        $scope.rechercheType=type;
+        $scope.rechercheType=[id];
         $scope.page = 1;
         $scope.query = "";
         $scope.goSearch();
@@ -324,6 +370,10 @@ app.controller('mainController', ['$scope', '$http', 'ngCart', 'modalService', '
         if (e !== 13) return;
         $scope.query = document.getElementById("query").value;
         $scope.page = 1;
+        if ($scope.isSearching === false) {
+            $scope.setType([]);
+            $scope.setRegion([]);
+        }
         $scope.goSearch();
     };
 
@@ -339,8 +389,17 @@ app.controller('mainController', ['$scope', '$http', 'ngCart', 'modalService', '
             res += (tig + "page=" + $scope.page);
             tig = "&";
         }
-        if ($scope.rechercheType !== "") {
-            res += (tig + "type=" + $scope.rechercheType);
+        if ($scope.rechercheType.length > 0) {
+            res += (tig + "type=" + $scope.rechercheType[0]);
+            for (var i=1; i<$scope.rechercheType.length; i++) {
+                res += ("+"+ $scope.rechercheType[i]);
+            }
+        }
+        if ($scope.rechercheRegion.length > 0) {
+            res += (tig + "region=" + $scope.rechercheRegion[0]);
+            for (i=1; i<$scope.rechercheRegion.length; i++) {
+                res += ("+"+ $scope.rechercheRegion[i]);
+            }
         }
 
         $location.url(res);

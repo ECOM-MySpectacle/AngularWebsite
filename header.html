@@ -38,16 +38,16 @@
     <div class="leftSideNavSeparator"></div>
     <div ng-show="!isSearching" class="leftSideNavButtons">
         <div class="leftSideNavGroup">
-            <button ng-click="setRechercheType('c','1')"><p>Concerts</p>   <div class="icon"><span><i class="fa fa-map-marker" aria-hidden="true"></i></span></div></button>
-            <button ng-click="setRechercheType('th','2')"><p>Théâtre & Humour</p>   <div class="icon"><span><i class="fa fa-smile-o" aria-hidden="true"></i></span></div></button>
-            <button ng-click="setRechercheType('s','3')"><p>Sports</p>   <div class="icon"><span><i class="fa fa-soccer-ball-o" aria-hidden="true"></i></span></div></button>
-            <button ng-click="setRechercheType('scc','4')"><p>Spectacle, cabarets, cirques</p>   <div class="icon"><span><i class="fa fa-telegram" aria-hidden="true"></i></span></div></button>
-            <button ng-click="setRechercheType('mem','5')"><p>Musées, expos, monuments</p>   <div class="icon"><span><i class="fa fa-bank" aria-hidden="true"></i></span></div></button>
-            <button ng-click="setRechercheType('psc','6')"><p>Parcs, salons, ciné</p>   <div class="icon"><span><i class="fa fa-tree" aria-hidden="true"></i></span></div></button>
-            <button ng-click="setRechercheType('f','7')"><p>Festivals</p>   <div class="icon"><span><i class="fa fa-glass" aria-hidden="true"></i></span></div></button>
-            <button ng-click="setRechercheType('cod','8')"><p>Classique, opéra, danse</p>   <div class="icon"><span><i class="fa fa-cutlery" aria-hidden="true"></i></span></div></button>
-            <button ng-click="setRechercheType('spe','9')"><p>Spectacles pour enfants</p>   <div class="icon"><span><i class="fa fa-leaf" aria-hidden="true"></i></span></div></button>
-            <button ng-click="setRechercheType('al','10')"><p>Activités de Loisirs</p>   <div class="icon"><span><i class="fa fa-snowflake-o" aria-hidden="true"></i></span></div></button>
+            <button ng-click="setRechercheType(1)"><p>Concerts</p>   <div class="icon"><span><i class="fa fa-map-marker" aria-hidden="true"></i></span></div></button>
+            <button ng-click="setRechercheType(2)"><p>Théâtre & Humour</p>   <div class="icon"><span><i class="fa fa-smile-o" aria-hidden="true"></i></span></div></button>
+            <button ng-click="setRechercheType(3)"><p>Sports</p>   <div class="icon"><span><i class="fa fa-soccer-ball-o" aria-hidden="true"></i></span></div></button>
+            <button ng-click="setRechercheType(4)"><p>Spectacle, cabarets, cirques</p>   <div class="icon"><span><i class="fa fa-telegram" aria-hidden="true"></i></span></div></button>
+            <button ng-click="setRechercheType(5)"><p>Musées, expos, monuments</p>   <div class="icon"><span><i class="fa fa-bank" aria-hidden="true"></i></span></div></button>
+            <button ng-click="setRechercheType(6)"><p>Parcs, salons, ciné</p>   <div class="icon"><span><i class="fa fa-tree" aria-hidden="true"></i></span></div></button>
+            <button ng-click="setRechercheType(7)"><p>Festivals</p>   <div class="icon"><span><i class="fa fa-glass" aria-hidden="true"></i></span></div></button>
+            <button ng-click="setRechercheType(8)"><p>Classique, opéra, danse</p>   <div class="icon"><span><i class="fa fa-cutlery" aria-hidden="true"></i></span></div></button>
+            <button ng-click="setRechercheType(9)"><p>Spectacles pour enfants</p>   <div class="icon"><span><i class="fa fa-leaf" aria-hidden="true"></i></span></div></button>
+            <button ng-click="setRechercheType(10)"><p>Activités de Loisirs</p>   <div class="icon"><span><i class="fa fa-snowflake-o" aria-hidden="true"></i></span></div></button>
         </div>
         <div class="leftSideNavSeparator"></div>
         <div class="leftSideNavGroup">
@@ -64,14 +64,16 @@
 
                 <div class="recherche-param-titre">Régions</div>
 
-                <div ng-dropdown-multiselect="" options="regionDropdownData" selected-model="regionDropdownModel" extra-settings="regionDropdownSettings"></div>
+                <div ng-dropdown-multiselect="" options="regionDropdownData" selected-model="regionDropdownModel" extra-settings="regionDropdownSettings"
+                    events="regionDropdownChanged"></div>
             </div>
 
             <div class="recherche-param">
 
                 <div class="recherche-param-titre">Type de spectacle</div>
 
-                <div ng-dropdown-multiselect="" options="typeDropdownData" selected-model="typeDropdownModel" extra-settings="regionDropdownSettings"></div>
+                <div ng-dropdown-multiselect="" options="typeDropdownData" selected-model="typeDropdownModel" extra-settings="regionDropdownSettings"
+                     events="typeDropdownChanged"></div>
             </div>
 
 
