@@ -110,7 +110,7 @@ app.controller('recherche', function($scope, $location, Restangular) {
     if (typeof $location.search().region !== "undefined")
         $scope.setRegion($location.search().region.split(' '));
 
-    $scope.perPage = 16;
+    $scope.perPage = 12;
     $scope.nbPages = $scope.page;
 
     // construit le ventre de la requete
