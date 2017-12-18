@@ -129,9 +129,15 @@ app.controller('recherche', function($scope, $location, Restangular) {
     if (typeof $scope.query !== "undefined") {
         filter.name = $scope.query;
     }
+    if ($scope.getRegion().length > 0) {
+        filter.region = [];
+        for (var i = 0; i < $scope.getRegion().length; i++) {
+            filter.region.push($scope.getRegion()[i].label);
+        }
+    }
     if ($scope.getType().length > 0) {
         filter.genre = [];
-        for (var i = 0; i < $scope.getType().length; i++) {
+        for (i = 0; i < $scope.getType().length; i++) {
             filter.genre.push($scope.getType()[i].label);
         }
     }
@@ -144,6 +150,7 @@ app.controller('recherche', function($scope, $location, Restangular) {
     Restangular.all('recherche/spectacles').post(postBody).then(function(result) {
         if (typeof result.error !== "undefined") {
             console.log('Error: '+result.error);
+            $scope.rechercheEnded = true;
             return;
         }
         $scope.nbPages = result.pages;
@@ -425,7 +432,8 @@ app.controller('panier', function ($scope, ngCart, modalService) {
     };
 
     $scope.moinsUn = function(item) {
-        ngCart.addItem(item.getId(), item.getName(), item.getPrice(), -1);
+        if (item.getQuantity() > 1)
+            ngCart.addItem(item.getId(), item.getName(), item.getPrice(), -1);
     };
     $scope.warningBillet = function (item) {
         modalService.openModal('warningModal.html','warningController','md', item.getId() );

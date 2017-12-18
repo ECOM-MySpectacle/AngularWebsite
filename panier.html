@@ -42,7 +42,8 @@
         </div>
     </div>
 
-    <div style="float: right; width: 24%;background-color: #f0f0f0;margin-right: 4%;margin-top: 94px">
+    <div style="float: right; width: 24%;background-color: #f0f0f0;margin-right: 4%;margin-top: 94px"
+        ng-if="cart.getTotalItems() > 0">
         <h2 class="recherche-param-titre" style="margin-top: 0; margin-bottom: 0">Résumé</h2>
 
 
@@ -60,6 +61,7 @@
             <a href="" class="tileModaladdToCart">
                 Réserver
             </a>
+
             <a href="#!checkout" class="btn-block tileModaladdToCart">
                 € Payer maintenant
             </a>
