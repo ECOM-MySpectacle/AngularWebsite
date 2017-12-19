@@ -68,7 +68,6 @@ app.controller("tileController", function($scope,$uibModalInstance,spectacle,ngC
 
         if ($scope.selectedSpectacle.representation.length > 0) {
             $scope.selectedRepresentation = $scope.selectedSpectacle.representation[0].id;
-            $scope.bornSup = parseInt($scope.selectedSpectacle.representation[0].nbPlacesFosseLibres);
         }
         $scope.checkBornSup();
     });
@@ -109,7 +108,7 @@ app.controller("tileController", function($scope,$uibModalInstance,spectacle,ngC
     };
 
     $scope.addItToCart = function() {
-        ngCart.addItem($scope.selectedRepresentation, $scope.selectedSpectacle.name, 7.99, $scope.quantite, $scope.selectedTypePlace);
+        ngCart.addItem($scope.selectedRepresentation.toString()+"+"+$scope.selectedTypePlace, $scope.selectedSpectacle.name, 7.99, $scope.quantite);
         var toast = $mdToast.simple()
             .action('ANNULER')
             .highlightAction(true)
@@ -119,7 +118,7 @@ app.controller("tileController", function($scope,$uibModalInstance,spectacle,ngC
         if ($scope.quantite>1) toast.textContent($scope.quantite+' éléments ajoutés');
         $mdToast.show(toast).then(function(response) {
             if ( response === 'ok' ) {
-                ngCart.addItem($scope.selectedRepresentation, $scope.selectedSpectacle.name, 7.99, -$scope.quantite, $scope.selectedTypePlace);
+                ngCart.addItem($scope.selectedRepresentation.toString()+"+"+$scope.selectedTypePlace, $scope.selectedSpectacle.name, 7.99, -$scope.quantite);
             }
         });
     };
@@ -215,40 +214,10 @@ app.controller('recherche', function($scope, $location, Restangular) {
             $scope.listeReponse.push($scope.curItem);
         }
 
-        // if ($scope.listeReponse.length > 0) {
-        //     $scope.curItem = $scope.listeReponse[0];
-        //     $scope.index = 1;
-        //     $scope.loadArtiste = function (item) {
-        //         Restangular.all('spectacles/' + item.id +'/artistess').getList().then(function (result) {
-        //             item.artiste="";
-        //             for(var i=0; i<result.length; i++) {
-        //                 item.artiste += (result[i].nom+" ");
-        //             }
-        //             if($scope.listeReponse.length > $scope.index) {
-        //                 $scope.index++;
-        //                 $scope.loadArtiste($scope.listeReponse[$scope.index-1]);
-        //             }
-        //
-        //         });
-        //     };
-        //     $scope.loadArtiste($scope.curItem);
-        // }
-
         $scope.rechercheEnded = true;
     }, function() {
         console.log("There was an error in the POST request:"+postBody);
     });
-
-
-    for(i=0; i<$scope.listeReponse.length; i++) {
-        Restangular.all('spectacles/' + $scope.listeReponse[i].id + "/artistess").getList().then(function (result) {
-            $scope.curItem.astiste = [];
-            for (var j = 0; j < result.length; j++) {
-                $scope.curItem.astiste.push(result[j].nom);
-            }
-            console.log(result);
-        });
-    }
 
     $scope.pageChanged = function() {
         $scope.setPage($scope.page);
@@ -509,12 +478,12 @@ app.controller('panier', function ($scope, ngCart, modalService) {
     $scope.cart=ngCart;
 
     $scope.plusUn = function(item) {
-        ngCart.addItem(item.getId(), item.getName(), item.getPrice(), 1);
+        ngCart.addItem(item.getId(), item.getName(), item.getPrice(), 1, item.getData());
     };
 
     $scope.moinsUn = function(item) {
         if (item.getQuantity() > 1)
-            ngCart.addItem(item.getId(), item.getName(), item.getPrice(), -1);
+            ngCart.addItem(item.getId(), item.getName(), item.getPrice(), -1, item.getData());
     };
     $scope.warningBillet = function (item) {
         modalService.openModal('warningModal.html','warningController','md', item.getId() );
