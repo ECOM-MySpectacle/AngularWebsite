@@ -36,7 +36,7 @@ app.controller("checkout-controller", function($scope, ngCart, Restangular){
                 postBody.spectacles = [];
                 for (var i = 0; i < items.length; i++) {
                     var item = {};
-                    item.id = items[i].getId().split('+')[0];
+                    item.id = parseInt(items[i].getId().split('+')[0]);
                     item.quantite = items[i].getQuantity();
                     item.position = typePlace[items[i].getId().split('+')[1]];
                     postBody.spectacles.push(item);
