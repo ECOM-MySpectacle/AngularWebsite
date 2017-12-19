@@ -29,6 +29,8 @@ app.controller("checkout-controller", function($scope, ngCart, Restangular){
             } else {
                 postBody.token = result.id;
             }
+            var typePlace = ["fosse","balcon","orchestre"];
+
             var items = $scope.cart.getItems();
             if (items.length > 0) {
                 postBody.spectacles = [];
@@ -36,14 +38,14 @@ app.controller("checkout-controller", function($scope, ngCart, Restangular){
                     var item = {};
                     item.id = items[i].getId();
                     item.quantite = items[i].getQuantity();
-                    item.possition = 'fosse';
+                    item.position = typePlace[items[i].getData()];
                     postBody.spectacles.push(item);
                 }
             }
 
             console.log(postBody);
 
-            Restangular.all('recherche/spectacles').post(postBody).then(function(result) {
+            Restangular.all('booking').post(postBody).then(function(result) {
                 if (typeof result.error !== "undefined") {
                     console.log('Error: '+result.error);
                     return;

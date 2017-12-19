@@ -47,13 +47,61 @@ app.controller("creationCompteController",function($scope,$uibModalInstance){
     };
 });
 
-app.controller("tileController", function($scope,$uibModalInstance,spectacle,ngCart,$mdToast){
+app.controller("tileController", function($scope,$uibModalInstance,spectacle,ngCart,$mdToast, Restangular){
     $scope.selectedSpectacle = spectacle;
 
     $scope.quantite = 1;
+    $scope.selectedTypePlace = 0;
+
+    Restangular.all('spectacles/' + $scope.selectedSpectacle.id +'/artistess').getList().then(function (result) {
+        $scope.selectedSpectacle.artiste="";
+         for(var i=0; i<result.length; i++) {
+             $scope.selectedSpectacle.artiste += (result[i].nom+" ");
+         }
+    });
+
+    Restangular.all('spectacles/' + $scope.selectedSpectacle.id +'/representations').getList().then(function (result) {
+        $scope.selectedSpectacle.representation = [];
+        for (var i = 0; i < result.length; i++) {
+            $scope.selectedSpectacle.representation.push(result[i]);
+        }
+
+        if ($scope.selectedSpectacle.representation.length > 0) {
+            $scope.selectedRepresentation = $scope.selectedSpectacle.representation[0].id;
+            $scope.bornSup = parseInt($scope.selectedSpectacle.representation[0].nbPlacesFosseLibres);
+        }
+        $scope.checkBornSup();
+    });
 
     $scope.plusUn = function() {
         $scope.quantite++;
+        $scope.checkBornSup();
+    };
+
+    $scope.checkBornSup = function() {
+        var index = -1;
+        for(var i = 0, len = $scope.selectedSpectacle.representation.length; i < len; i++) {
+            if ($scope.selectedSpectacle.representation[i].id === $scope.selectedRepresentation) {
+                index = i;
+                break;
+            }
+        }
+        switch($scope.selectedTypePlace) {
+            case 0:
+                if ($scope.quantite > parseInt($scope.selectedSpectacle.representation[index].nbPlacesFosseLibres))
+                    $scope.quantite = parseInt($scope.selectedSpectacle.representation[index].nbPlacesFosseLibres);
+                break;
+
+            case 1:
+                if ($scope.quantite > parseInt($scope.selectedSpectacle.representation[index].nbPlacesBalconLibres))
+                    $scope.quantite = parseInt($scope.selectedSpectacle.representation[index].nbPlacesBalconLibres);
+                break;
+
+            default:
+                if ($scope.quantite > parseInt($scope.selectedSpectacle.representation[index].nbPlacesOrchestreLibres))
+                    $scope.quantite = parseInt($scope.selectedSpectacle.representation[index].nbPlacesOrchestreLibres);
+                break;
+        }
     };
 
     $scope.moinsUn = function() {
@@ -61,7 +109,7 @@ app.controller("tileController", function($scope,$uibModalInstance,spectacle,ngC
     };
 
     $scope.addItToCart = function() {
-        ngCart.addItem($scope.selectedSpectacle.id, $scope.selectedSpectacle.name, 7.99, $scope.quantite);
+        ngCart.addItem($scope.selectedRepresentation, $scope.selectedSpectacle.name, 7.99, $scope.quantite, $scope.selectedTypePlace);
         var toast = $mdToast.simple()
             .action('ANNULER')
             .highlightAction(true)
@@ -71,7 +119,7 @@ app.controller("tileController", function($scope,$uibModalInstance,spectacle,ngC
         if ($scope.quantite>1) toast.textContent($scope.quantite+' éléments ajoutés');
         $mdToast.show(toast).then(function(response) {
             if ( response === 'ok' ) {
-                ngCart.addItem($scope.selectedSpectacle.id, $scope.selectedSpectacle.name, 7.99, -$scope.quantite);
+                ngCart.addItem($scope.selectedRepresentation, $scope.selectedSpectacle.name, 7.99, -$scope.quantite, $scope.selectedTypePlace);
             }
         });
     };
@@ -145,6 +193,7 @@ app.controller('recherche', function($scope, $location, Restangular) {
     postBody.filters = filter;
 
     $scope.listeReponse = [];
+    $scope.listeArtiste = [];
 
     $scope.rechercheEnded = false;
     Restangular.all('recherche/spectacles').post(postBody).then(function(result) {
@@ -154,20 +203,52 @@ app.controller('recherche', function($scope, $location, Restangular) {
             return;
         }
         $scope.nbPages = result.pages;
-        for (var i=0; i<result.entities.length; i++) {
-            var item = {};
-            if (typeof result.entities[i].nom !== "undefined") item.name = result.entities[i].nom;
-            if (typeof result.entities[i].id !== "undefined") item.id = result.entities[i].id;
-            if (typeof result.entities[i].description !== "undefined") item.description = result.entities[i].description;
-            if (typeof result.entities[i].genre !== "undefined") item.genre = result.entities[i].genre;
-            if (typeof result.entities[i].theme !== "undefined") item.theme = result.entities[i].theme;
 
-            $scope.listeReponse.push(item);
+        for (var i=0; i<result.entities.length; i++) {
+            $scope.curItem = {};
+            if (typeof result.entities[i].nom !== "undefined") $scope.curItem.name = result.entities[i].nom;
+            if (typeof result.entities[i].id !== "undefined") $scope.curItem.id = result.entities[i].id;
+            if (typeof result.entities[i].description !== "undefined") $scope.curItem.description = result.entities[i].description;
+            if (typeof result.entities[i].genre !== "undefined") $scope.curItem.genre = result.entities[i].genre;
+            if (typeof result.entities[i].theme !== "undefined") $scope.curItem.theme = result.entities[i].theme;
+
+            $scope.listeReponse.push($scope.curItem);
         }
+
+        // if ($scope.listeReponse.length > 0) {
+        //     $scope.curItem = $scope.listeReponse[0];
+        //     $scope.index = 1;
+        //     $scope.loadArtiste = function (item) {
+        //         Restangular.all('spectacles/' + item.id +'/artistess').getList().then(function (result) {
+        //             item.artiste="";
+        //             for(var i=0; i<result.length; i++) {
+        //                 item.artiste += (result[i].nom+" ");
+        //             }
+        //             if($scope.listeReponse.length > $scope.index) {
+        //                 $scope.index++;
+        //                 $scope.loadArtiste($scope.listeReponse[$scope.index-1]);
+        //             }
+        //
+        //         });
+        //     };
+        //     $scope.loadArtiste($scope.curItem);
+        // }
+
         $scope.rechercheEnded = true;
     }, function() {
         console.log("There was an error in the POST request:"+postBody);
     });
+
+
+    for(i=0; i<$scope.listeReponse.length; i++) {
+        Restangular.all('spectacles/' + $scope.listeReponse[i].id + "/artistess").getList().then(function (result) {
+            $scope.curItem.astiste = [];
+            for (var j = 0; j < result.length; j++) {
+                $scope.curItem.astiste.push(result[j].nom);
+            }
+            console.log(result);
+        });
+    }
 
     $scope.pageChanged = function() {
         $scope.setPage($scope.page);

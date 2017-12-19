@@ -5980,10 +5980,13 @@ button.close {
   .modal-sm {
     width: 300px;
   }
+  .modal-lg {
+    width: 90%;
+  }
 }
 @media (min-width: 1500px) {
   .modal-lg {
-    width: 1500px;
+    width: 90%;
   }
   .modal-content {
     border-radius: 0;

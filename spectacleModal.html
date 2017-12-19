@@ -20,17 +20,65 @@
                     </div>
                 </div>
 
-                <button class="btn-block tileModaladdToCart" ng-click="addItToCart()">
-                    Ajouter au panier
-                </button>
+                <div ng-if="quantite>0">
+                    <button class="btn-block tileModaladdToCart" ng-click="addItToCart()">
+                        Ajouter au panier
+                    </button>
+                </div>
+                <div ng-if="quantite<=0">
+                    <button class="btn-block tileModaladdToCart disabled-but" ng-click="addItToCart()">
+                        Ajouter au panier
+                    </button>
+                </div>
+                <h3>Type de place :</h3>
+                <md-radio-group ng-model="selectedTypePlace" ng-change='checkBornSup()'>
+                    <md-radio-button ng-value=0 class="md-primary table-radio" aria-label="ouille">
+                        Fosse
+                    </md-radio-button>
+                    <md-radio-button ng-value=1 class="md-primary table-radio" aria-label="ouille">
+                        Balcon
+                    </md-radio-button>
+                    <md-radio-button ng-value=2 class="md-primary table-radio" aria-label="ouille">
+                        Orchestre
+                    </md-radio-button>
+                </md-radio-group>
             </div>
 
             <div class="col-md-8">
                 <h2 ng-bind="selectedSpectacle.name"></h2><br>
                 <b>Thèmes : </b><span ng-bind="selectedSpectacle.theme"></span><br><br>
-                <b>Acteurs : </b><span ng-bind="selectedSpectacle.theme"></span><br><br><br>
+                <b>Acteurs : </b><span ng-bind="selectedSpectacle.artiste"></span><br><br><br>
                 <b>Description :</b><br>
-                <h5 ng-bind="selectedSpectacle.description"></h5>
+                <h5 ng-bind="selectedSpectacle.description"></h5><br>
+
+                <md-radio-group ng-model="selectedRepresentation" ng-change='checkBornSup()'>
+                    <table>
+                        <tr>
+                            <th>Date</th>
+                            <th>Places fosse</th>
+                            <th>Places balcon</th>
+                            <th>Places Orchestre</th>
+                        </tr>
+                        <tr ng-repeat="item in  selectedSpectacle.representation">
+                            <td>
+                            <md-radio-button ng-value="item.id" class="md-warn table-radio" aria-label="ouille">
+                                <div ng-bind="item.date"></div>
+                            </md-radio-button>
+                            </td>
+                            <td>
+                                <div ng-bind="item.nbPlacesFosseLibres" class="table-number"></div>
+                            </td>
+                            <td>
+                                <div ng-bind="item.nbPlacesBalconLibres" class="table-number"></div>
+                            </td>
+                            <td>
+                                <div ng-bind="item.nbPlacesOrchestreLibres" class="table-number"></div>
+                            </td>
+                        </tr>
+                    </table>
+
+                </md-radio-group>
+
             </div>
         </div>
     </div>

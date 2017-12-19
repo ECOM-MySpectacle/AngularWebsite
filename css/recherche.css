@@ -293,6 +293,22 @@ body {
     float:right;
     user-select: none;
 }
+th {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+td {
+    border: 1px solid lightgrey;
+}
+
+.table-number {
+    text-align: center;
+}
+
+.table-radio {
+    margin: 10px;
+}
 
 .tileModalInput{
     transition: 0.15s ease;
@@ -413,6 +429,10 @@ body {
     opacity: 0;
 }
 
+.disabled-but {
+    background-color: lightgrey;
+    pointer-events: none;
+}
 
 .boutonFermer {
     transition: 0.2s ease;
