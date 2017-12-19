@@ -8,6 +8,8 @@ app.controller("checkout-controller", function($scope, ngCart, Restangular){
     $scope.cvc = "";
     $scope.setShowSideNav(false);
 
+    $scope.transactionTerminer = false;
+
     $scope.stripeCallback = function (code, result) {
         if (result.error) {
             window.alert('it failed! error: ' + result.error.message);
@@ -45,10 +47,9 @@ app.controller("checkout-controller", function($scope, ngCart, Restangular){
 
             Restangular.all('booking').post(postBody).then(function(result) {
                 if (typeof result.error !== "undefined") {
-                    console.log('Error: '+result.error);
-                    return;
+                    if (result.error === 'OK')
+                        $scope.transactionTerminer = true;
                 }
-                console.log(result);
             }, function() {
                 console.log("There was an error in the POST request:"+postBody);
             });
