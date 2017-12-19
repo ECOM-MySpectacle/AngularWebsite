@@ -1,11 +1,11 @@
 app.controller("checkout-controller", function($scope, ngCart, Restangular){
 
     $scope.cart = ngCart;
-    $scope.mail = "moulisse@example.com";
-    $scope.nom = "moulisse";
-    $scope.number = "4556 2943 8634 0813";
-    $scope.expiry = "04/19";
-    $scope.cvc = "637";
+    $scope.mail = "";
+    $scope.nom = "";
+    $scope.number = "";
+    $scope.expiry = "";
+    $scope.cvc = "";
     $scope.setShowSideNav(false);
 
     $scope.stripeCallback = function (code, result) {
@@ -43,8 +43,6 @@ app.controller("checkout-controller", function($scope, ngCart, Restangular){
                 }
             }
 
-            console.log(postBody);
-
             Restangular.all('booking').post(postBody).then(function(result) {
                 if (typeof result.error !== "undefined") {
                     console.log('Error: '+result.error);
@@ -54,8 +52,6 @@ app.controller("checkout-controller", function($scope, ngCart, Restangular){
             }, function() {
                 console.log("There was an error in the POST request:"+postBody);
             });
-
-            window.alert('success! token: ' + result.id);
         }
     };
 
